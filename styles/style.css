@@ -1,0 +1,85 @@
+/* Estilos generales del body */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('../img/logos/logo 2.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    color: #000; /* Color de texto */
+}
+
+/* Estilos para el header */
+header {
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo semi-transparente para que el texto sea legible */
+    padding: 20px;
+    text-align: center;
+}
+
+/* Estilos para los enlaces del nav en el header */
+header nav a {
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 0 15px;
+}
+
+/* Estilo para los enlaces al pasar el ratón */
+header nav a:hover {
+    text-decoration: underline;
+}
+
+/* Ajustes para el contenedor principal */
+.container {
+    padding: 60px 15px; /* Ajustar para crear espacio entre los elementos */
+}
+
+/* Estilos para las tarjetas de productos */
+.card {
+    border: none;
+    transition: transform 0.3s ease;
+}
+
+/* Efecto de escala al pasar el ratón sobre la tarjeta */
+.card:hover {
+    transform: scale(1.05);
+}
+
+/* Estilos para el footer */
+footer {
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo semi-transparente */
+    padding: 20px;
+    text-align: center;
+}
+
+/* Estilo para las imágenes dentro de las tarjetas */
+.card-img-top {
+    width: 100%; /* Asegura que la imagen ocupe todo el ancho del contenedor de la tarjeta */
+    height: auto; /* Mantiene la relación de aspecto original de la imagen */
+    object-fit: cover; /* Asegura que la imagen cubra el contenedor sin distorsionarse */
+}
+
+/* Opcional: Ajusta el tamaño del contenedor de la tarjeta */
+
+.cart {
+    position: relative;
+    text-decoration: none;
+    color: #FF0000; /* Color rojo */
+}
+
+.cart img {
+    margin-left: 5px;
+}
+
+.badge {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: #FF0000; /* Color rojo */
+    color: white;
+    border-radius: 50%;
+    padding: 2px 5px;
+    font-size: 12px;
+}
