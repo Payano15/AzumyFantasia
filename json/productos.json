@@ -1,38 +1,44 @@
 [
     {
-        "image": "../img/anillo/anillo.jpeg",
+        "id": "1",
         "name": "Producto 1",
-        "description": "Anillos de mostacilla y ranita.",
-        "price": "$25"
+        "description": "Anillos de mostacilla y ranita",
+        "price": 25.00,
+        "image": "../img/anillo/anillo.jpeg"
     },
     {
-        "image": "../img/anillo/anillos.jpeg",
+        "id": "2",
         "name": "Producto 2",
-        "description": "Anillos de mostacilla con emojis (dos colores).",
-        "price": "$25"
+        "description": "Anillos de mostacilla con emojis (dos colores)",
+        "price": 25.00,
+        "image": "../img/anillo/anillos.jpeg"
     },
     {
-        "image": "../img/aretes y cadenas/aretes y cadenas.jpeg",
+        "id": "3",
         "name": "Producto 3",
-        "description": "Descripción del Producto 3.",
-        "price": "$39.99"
+        "description": "Descripción del Producto 3",
+        "price": 39.99,
+        "image": "../img/aretes y cadenas/aretes y cadenas.jpeg"
     },
     {
-        "image": "../img/cadenas/cadena4.jpeg",
-        "name": "Producto A",
-        "description": "Descripción del Producto A.",
-        "price": "$24.99"
+        "id": "4",
+        "name": "Producto 4",
+        "description": "Anillos de mostacilla con emojis (dos colores)",
+        "price": 25.00,
+        "image": "../img/anillo/anillos.jpeg"
     },
     {
-        "image": "../img/cadenas/cadena.jpeg",
-        "name": "Producto A",
-        "description": "Descripción del Producto A.",
-        "price": "$24.99"
+        "id": "5",
+        "name": "Producto 5",
+        "description": "Anillos de mostacilla con emojis (dos colores)",
+        "price": 25.00,
+        "image": "../img/anillo/anillos.jpeg"
     },
     {
-        "image": "../img/cadenas/cadena2.jpeg",
-        "name": "Producto A",
-        "description": "Descripción del Producto A.",
-        "price": "$24.99"
+        "id": "6",
+        "name": "Producto 6",
+        "description": "Anillos de mostacilla con emojis (dos colores)",
+        "price": 25.00,
+        "image": "../img/anillo/anillos.jpeg"
     }
 ]

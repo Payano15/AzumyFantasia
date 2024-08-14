@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../img/logos/logo 1.jpeg" type="image/x-icon">
+    <title>Carrito de Compras</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./styles/styles.css"> <!-- Enlace a tu archivo CSS externo -->
+</head>
+<body>
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="../index.html">INICIO</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">PRODUCTOS</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">NOSOTROS</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">CONTACTO</a>
+                </li>
+            </ul>
+            <span class="navbar-text">
+                <a href="#cart" class="nav-link">CARRITO (<span id="cart-count">0</span>)</a>
+            </span>
+        </div>
+    </nav>
+</header>
+
+<div class="container mt-4" id="cart">
+    <h2 class="text-center">Carrito</h2>
+    <div class="cart-header row">
+        <div class="col-md-6">Producto</div>
+        <div class="col-md-2">Precio</div>
+        <div class="col-md-2">Cantidad</div>
+        <div class="col-md-2">Subtotal</div>
+    </div>
+    <div id="cart-items"></div> <!-- Contenedor para los productos del carrito -->
+    
+    <div class="cart-footer row mt-4">
+        <div class="col-md-6">Subtotal</div>
+        <div class="col-md-6 text-right" id="total-price">$0.00</div>
+    </div>
+    
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <input type="text" class="form-control" placeholder="Código de cupón">
+        </div>
+        <div class="col-md-6">
+            <button class="btn btn-primary">APLICAR CUPÓN</button>
+        </div>
+    </div>
+    
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <button class="btn btn-secondary">ACTUALIZAR CARRITO</button>
+        </div>
+        <div class="col-md-6 text-right">
+            <button class="btn btn-success">FINALIZAR COMPRA</button>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="container">
+        <p>&copy; 2024 Tienda. Todos los derechos reservados.</p>
+    </div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="./mostrat_productos_fact.js"></script> <!-- Enlace a tu archivo JavaScript externo -->
+</body>
+</html>
+
+
