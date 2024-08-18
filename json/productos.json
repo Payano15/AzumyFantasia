@@ -4,41 +4,41 @@
         "name": "Producto 1",
         "description": "Anillos de mostacilla y ranita",
         "price": 25.00,
-        "image": "/img/anillo/anillo.jpg"
+        "image": "../img/anillo/anillo.jpg"
     },
     {
         "id": "2",
         "name": "Producto 2",
         "description": "Anillos de mostacilla con emojis (dos colores)",
         "price": 25.00,
-        "image": "/img/anillo/anillos.jpg"
+        "image": "../img/anillo/anillos.jpg"
     },
     {
         "id": "3",
         "name": "Producto 3",
-        "description": "Descripción del Producto 3",
+        "description": "nillos de mostacilla y ranita",
         "price": 39.99,
-        "image": "/img/aretes y cadenas/aretes y cadenas.jpg"
+        "image": "../img/aretes y cadenas/aretes y cadenas.jpg"
     },
     {
         "id": "4",
         "name": "Producto 4",
         "description": "Anillos de mostacilla con emojis (dos colores)",
         "price": 25.00,
-        "image": "/img/anillo/anillos.jpg"
+        "image": "../img/anillo/anillos.jpg"
     },
     {
         "id": "5",
         "name": "Producto 5",
         "description": "Anillos de mostacilla con emojis (dos colores)",
         "price": 25.00,
-        "image": "/img/anillo/anillos.jpg"
+        "image": "../img/anillo/anillos.jpg"
     },
     {
         "id": "6",
         "name": "Producto 6",
         "description": "Anillos de mostacilla con emojis (dos colores)",
         "price": 25.00,
-        "image": "/img/anillo/anillos.jpg"
+        "image": "../img/anillo/anillos.jpg"
     }
 ]

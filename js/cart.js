@@ -18,15 +18,31 @@ function addToCart(product) {
 // Función para actualizar la interfaz del carrito
 function updateCartUI() {
     const totalPriceElem = document.getElementById('total-price');
+    const cartCountElem = document.getElementById('cart-count');
+    
+    if (!totalPriceElem || !cartCountElem) {
+        console.error("Elementos 'total-price' o 'cart-count' no encontrados en el DOM.");
+        return;
+    }
+
     let totalPrice = 0;
+    let totalQuantity = 0;
 
     cart.forEach(product => {
         const subtotal = product.price * product.quantity;
         totalPrice += subtotal;
+        totalQuantity += product.quantity; // Contar la cantidad total de productos
     });
 
     totalPriceElem.innerText = `Total: $${totalPrice.toFixed(2)}`;
-    document.getElementById('cart-count').innerText = cart.length; // Actualizar el contador del carrito
+    
+    // Actualiza y muestra el contador solo si hay productos en el carrito
+    if (totalQuantity > 0) {
+        cartCountElem.innerText = totalQuantity;
+        cartCountElem.style.display = 'inline'; // Muestra el contador
+    } else {
+        cartCountElem.style.display = 'none'; // Oculta el contador si no hay productos
+    }
 }
 
 // Función para guardar el carrito en localStorage
