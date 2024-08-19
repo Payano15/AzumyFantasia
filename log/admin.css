@@ -1,0 +1,190 @@
+/* Estilos generales del body */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('../img/logos/BACK2.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    color: #000; /* Color de texto */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Asegura que el contenido ocupe al menos el 100% de la altura de la ventana */
+}
+
+/* Contenedor principal ajustado para trabajar con flexbox */
+.container {
+    flex: auto; /* Permite que el contenedor principal expanda para llenar el espacio disponible */
+    padding: 30px; /* Ajustar para crear espacio adicional dentro del contenedor */
+   width: 40%; /* Máxima anchura del contenedor */
+    margin: 0 auto; /* Centrar el contenedor */
+    text-align: left;
+    position:relative;
+}
+
+/* Estilos para el header */
+header {
+    background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco semi-transparente */
+    padding: 10px 0; /* Espacio adicional en el header */
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil para el header */
+}
+
+/* Estilos para los enlaces del nav en el header */
+header nav a {
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 0 15px; /* Espacio adicional entre enlaces */
+    transition: color 0.3s; /* Transición suave para el cambio de color */
+}
+
+/* Estilo para los enlaces al pasar el ratón */
+header nav a:hover {
+    color: #007BFF; /* Cambiar el color al pasar el ratón */
+    text-decoration: underline;
+}
+
+main {
+    font-family: 'Arial', sans-serif;
+    background-color: #8077773f;
+    padding: 20px;
+}
+
+
+/* Estilos para las secciones administrativas */
+.admin-section {
+    border: 1px solid #ddd;
+    padding: 30px; /* Aumentar el padding interno del contenedor */
+    margin: 4px 0;
+    border-radius: 8px; /* Bordes más redondeados */
+    background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco semi-transparente */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+/* Estilos para los formularios */
+.product-form {
+    margin: 0;
+}
+
+.product-form .form-list {
+    list-style: none; /* Elimina las viñetas de la lista */
+    padding: 0; /* Elimina el padding de la lista */
+}
+
+.product-form .form-list li {
+    margin-bottom: 20px; /* Espacio entre cada campo del formulario */
+}
+
+.product-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.product-form input[type="text"],
+.product-form input[type="file"],
+.product-form input[type="number"],
+.product-form textarea {
+    width: 100%;
+    padding: 12px; /* Aumentar el padding para mayor comodidad */
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px; /* Bordes redondeados en los campos de entrada */
+}
+
+.product-form textarea {
+    resize: vertical; /* Permite cambiar el tamaño verticalmente */
+}
+
+.product-form button {
+    padding: 12px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s;
+}
+
+.product-form button:hover {
+    background-color: #0056b3;
+}
+
+/* Estilos para el footer */
+footer {
+    background-color: rgba(121, 119, 119, 0.541); /* Fondo semi-transparente */
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil para el footer */
+    color: #fff;
+}
+
+/* Contenido del footer */
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+footer p {
+    margin: 10px 0;
+}
+
+footer a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+    transition: color 0.3s; /* Transición suave para el cambio de color */
+}
+
+footer a:hover {
+    color: #007BFF; /* Cambiar el color al pasar el ratón */
+    text-decoration: underline;
+}
+
+/* Estilos para el logo */
+.logo img {
+    height: 90px;
+    margin-bottom: 0;
+}
+
+/* Estilos para la navegación */
+nav {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1px;
+}
+
+nav a {
+    margin-left: 15px;
+    text-decoration: none;
+    color: #000;
+    transition: color 0.3s; /* Transición suave para el cambio de color */
+}
+
+nav a:hover {
+    color: #007BFF; /* Cambiar el color al pasar el ratón */
+    text-decoration: underline;
+}
+
+/* Estilos para las tarjetas de productos */
+.card {
+    border: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efecto de escala al pasar el ratón sobre la tarjeta */
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada al pasar el ratón */
+}
+
+/* Estilo para las imágenes dentro de las tarjetas */
+.card-img-top {
+    width: 100%; /* Asegura que la imagen ocupe todo el ancho del contenedor de la tarjeta */
+    height: auto; /* Mantiene la relación de aspecto original de la imagen */
+    object-fit: cover; /* Asegura que la imagen cubra el contenedor sin distorsionarse */
+}
