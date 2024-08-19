@@ -10,7 +10,15 @@ async function cargarProductos() {
             throw new Error(`Error al obtener productos: ${response.status}`);
         }
         
-        productos = await response.json();
+        const data = await response.json();
+
+        // Verificar si data es un objeto y contiene una propiedad "productos" que es un array
+        if (data && Array.isArray(data.productos)) {
+            productos = data.productos;
+        } else {
+            throw new Error('Los datos cargados no contienen un array de productos.');
+        }
+
         console.log('Productos cargados:', productos);
     } catch (error) {
         console.error('Error al cargar productos:', error);
@@ -19,63 +27,11 @@ async function cargarProductos() {
 
 // Buscar producto por ID en el array de productos
 function buscarProductoPorId(id) {
+    if (!Array.isArray(productos)) {
+        console.error('La variable "productos" no es un array.');
+        return null;
+    }
     return productos.find(producto => producto.id === id);
-}
-
-// Mostrar los detalles del producto en el DOM
-function mostrarDetallesProducto(producto) {
-    const productDetailsContainer = document.getElementById('product-details');
-
-    if (!producto) {
-        productDetailsContainer.innerHTML = '<p>Producto no encontrado.</p>';
-        return;
-    }
-
-    const { name, description, image, price } = producto;
-
-    productDetailsContainer.innerHTML = `
-        <p>${description}</p>
-        <img src="${image || './img/default.jpg'}" alt="${name}">
-        <p>Precio: $${price.toFixed(2)}</p>
-    `;
-}
-
-// Manejar la búsqueda del producto por ID
-function buscarYMostrarProducto() {
-    const id = parseInt(document.getElementById('product-id').value, 10);
-    const producto = buscarProductoPorId(id);
-
-    mostrarDetallesProducto(producto);
-}
-
-// Agregar un producto al carrito
-function agregarAlCarrito(id, cantidad) {
-    const producto = buscarProductoPorId(id);
-
-    if (!producto) {
-        console.error('Producto no encontrado:', id);
-        return;
-    }
-
-    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-    const index = carrito.findIndex(p => p.id === id);
-
-    if (index !== -1) {
-        carrito[index].quantity += cantidad;
-    } else {
-        const productoEnCarrito = {
-            id: id,
-            name: producto.name,
-            description: producto.description,
-            image: producto.image,
-            price: producto.price,
-            quantity: cantidad
-        };
-        carrito.push(productoEnCarrito);
-    }
-
-    localStorage.setItem('carrito', JSON.stringify(carrito));
-    console.log('Producto añadido al carrito:', producto);
 }
 
 // Mostrar los productos en el carrito
@@ -102,22 +58,30 @@ function mostrarProductosEnCarrito() {
             return;
         }
 
-        const { price = 0, description = 'Descripción no disponible', quantity = 1, image = './img/default.jpg' } = producto;
+        const { precio, descripcion, image } = producto;
+        const cantidad = itemCarrito.cantidad;
 
-        const subtotal = price * itemCarrito.quantity;
+        // Eliminar el símbolo `$` y las comas del precio y convertir a número
+        const precioNumerico = parseFloat(precio.replace(/[$,]/g, ''));
+
+        if (isNaN(precioNumerico)) {
+            console.error('El precio no es un número válido:', precioNumerico);
+            return;
+        }
+
+        const subtotal = precioNumerico * cantidad;
         totalSubtotal += subtotal;
 
         const itemHtml = `
             <div class="row cart-item align-items-center">
                 <div class="col-md-6 d-flex align-items-center">
-                    <img src="${image}" class="img-fluid" style="width: 80px; margin-right: 10px;">
+                    <img src="${image || './img/default.jpg'}" class="img-fluid" style="width: 80px; margin-right: 10px;">
                     <div>
-                        <h5>${producto.name}</h5>
-                        <p>${description}</p>
+                        <h5>${descripcion}</h5>
                     </div>
                 </div>
-                <div class="col-md-2">$${price.toFixed(2)}</div>
-                <div class="col-md-2">${itemCarrito.quantity}</div>
+                <div class="col-md-2">$${precioNumerico.toFixed(2)}</div>
+                <div class="col-md-2">${cantidad}</div>
                 <div class="col-md-2">$${subtotal.toFixed(2)}</div>
             </div>
         `;
@@ -131,9 +95,6 @@ function mostrarProductosEnCarrito() {
 
 // Cargar los productos del JSON cuando la página esté lista
 document.addEventListener('DOMContentLoaded', async () => {
-    await cargarProductos();
-    mostrarProductosEnCarrito();
-
-    // Asignar el manejador de eventos al botón de búsqueda si es necesario
-    // document.getElementById('search-product').addEventListener('click', buscarYMostrarProducto);
+    await cargarProductos(); // Asegúrate de que los productos se cargan antes de mostrar el carrito
+    mostrarProductosEnCarrito(); // Mostrar los productos en el carrito
 });
