@@ -1,0 +1,214 @@
+/* Estilos generales del body */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('../img/logos/BACK2.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    color: #000; /* Color de texto */
+}
+
+/* Estilos para el header */
+header {
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo semi-transparente */
+    padding: 10px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil para el header */
+}
+
+/* Estilos para los enlaces del nav en el header */
+header nav a {
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 0 15px;
+}
+
+header nav a:hover {
+    text-decoration: underline;
+}
+
+/* Ajustes para el contenedor principal */
+.container {
+    padding: 60px 15px; /* Ajustar para crear espacio entre los elementos */
+    max-width: 1200px; /* Máxima anchura del contenedor */
+    margin: 0 auto; /* Centrar el contenedor */
+}
+
+/* Estilos para las secciones administratives */
+.admin-section {
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 8px; /* Bordes más redondeados */
+    background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco semi-transparente */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+/* Estilos para los formularios */
+.product-form {
+    margin-bottom: 20px;
+}
+
+.product-form label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+}
+
+.product-form input[type="text"],
+.product-form input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px; /* Bordes redondeados en los campos de entrada */
+}
+
+.product-form button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s;
+}
+
+.product-form button:hover {
+    background-color: #0056b3;
+}
+
+/* Estilos para los productos */
+.product-item {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 8px; /* Bordes más redondeados */
+    background-color: #fff; /* Fondo blanco para los productos */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+.product-item img {
+    max-width: 100%;
+    height: auto; /* Mantiene la relación de aspecto */
+    border-bottom: 2px solid #eee; /* Línea debajo de la imagen */
+}
+
+/* Estilos para el catálogo de productos */
+.catalogo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.producto {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    max-width: 380px;
+    text-align: center;
+    padding: 20px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.producto:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.producto img {
+    width: 100%;
+    height: auto; /* Mantiene la relación de aspecto */
+    border-bottom: 2px solid #eee;
+}
+
+.producto h2 {
+    font-size: 1.5em;
+    margin: 10px 0;
+    color: #333;
+}
+
+.descripcion {
+    color: #777;
+    font-size: 0.9em;
+    margin: 10px 0;
+}
+
+.precio {
+    font-size: 1.2em;
+    color: #e94e77;
+    margin: 10px 0;
+}
+
+button {
+    background-color: #e94e77;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1em;
+    padding: 10px 20px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #d83f65;
+}
+
+/* Estilos para el footer */
+footer {
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1); /* Sombra en el footer */
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+footer p {
+    margin: 10px 0;
+}
+
+footer a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* Estilos para el logo */
+.logo img {
+    height: 90px;
+    margin-bottom: 0;
+}
+
+/* Estilos para la navegación */
+nav {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1px;
+}
+
+nav a {
+    margin-left: 15px;
+    text-decoration: none;
+    color: #000;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
