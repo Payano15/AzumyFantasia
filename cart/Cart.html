@@ -6,26 +6,9 @@
     <link rel="icon" href="../img/logos/logo 1.jpeg" type="image/x-icon">
     <title>Carrito de Compras</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./styles/styles.css"> <!-- Enlace a tu archivo CSS externo -->
+    <link rel="stylesheet" href="../cart/styles/styles.css"> <!-- Enlace a tu archivo CSS externo -->
     <style>
-        /* Ajustar el tamaño del logo */
-        .logo img {
-            max-width: 100px; /* Ajusta el tamaño según tus necesidades */
-            height: auto;
-        }
-        nav {
-            display: flex;
-            justify-content: flex-end;
-            margin-top: 10px;
-        }
-        nav a {
-            margin-left: 15px;
-            text-decoration: none;
-            color: #000;
-        }
-        nav a:hover {
-            text-decoration: underline;
-        }
+   
     </style>
 </head>
 <body>
@@ -33,6 +16,9 @@
         <a href="../index.html" class="logo">
             <img src="../img/logos/logo_1-removebg-sin fondo.png" alt="Logo" class="img-fluid">
         </a>
+
+        <center><H2>CARRITO DE COMPRAS</H2></center>
+
         <nav>
             <a href="../index.html">Inicio</a>
             <a href="../PRODUCTO/productos.html">Productos</a>
@@ -42,43 +28,40 @@
         </nav>
     </header>
 
-<header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="../index.html">INICIO</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="../productos.html">PRODUCTOS</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">NOSOTROS</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">CONTACTO</a>
-                </li>
-            </ul>
-            <span class="navbar-text">
-                <a href="#cart" class="nav-link">CARRITO (<span id="cart-count">0</span>)</a>
-            </span>
-        </div>
+        <br>
         <div id="cart-items"></div> <!-- Contenedor para los productos del carrito -->
-
+            <br>
+       
         <div class="cart-footer row mt-4">
             <div class="col-md-6 text-right">Total</div>
             <div class="col-md-6 text-right" id="total-price">$0.00</div> <!-- Total del carrito -->
         </div>
+    
+
+
         <div class="row mt-4">
-            <div class="col-md-6 text-right">
-                <button class="btn btn-success">FINALIZAR COMPRA</button>
+            <div class="col-md-12 text-center">
+                <button class="btn btn-success" id="final_button">FINALIZAR COMPRA</button>
             </div>
         </div>
-    </div>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 Tienda. Todos los derechos reservados.</p>
+        <br>
+        <br>
+        <br>
+    <footer class="text-center py-4">
+        <p>&copy; 2024 Your Company Name</p>
+        <div class="social-icons">
+            <a href="https://www.instagram.com/azumyfantasia" target="_blank">
+                <img src="https://img.icons8.com/ios-filled/50/000000/instagram-new.png" alt="Instagram">
+            </a>
+            <a href="https://www.facebook.com/share/xdnLnDHCXizQeDwT/?mibextid=qi2Omg" target="_blank">
+                <img src="https://img.icons8.com/ios-filled/50/000000/facebook-new.png" alt="Facebook">
+            </a>
+            <a href="https://wa.me/tu_numero" target="_blank">
+                <img src="https://img.icons8.com/ios-filled/50/000000/whatsapp.png" alt="WhatsApp">
+            </a>
+            <a href="https://www.tiktok.com/@azumyfantasia?_t=8on0ihPhIer&_r=1" target="_blank">
+                <img src="https://img.icons8.com/ios-filled/50/000000/tiktok.png" alt="TikTok">
+            </a>
         </div>
     </footer>
 

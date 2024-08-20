@@ -73,7 +73,7 @@ function mostrarProductosEnCarrito() {
         totalSubtotal += subtotal;
 
         const itemHtml = `
-            <div class="row cart-item align-items-center">
+            <div class="row cart-item align-items-center" style="margin-bottom: 15px;"> <!-- Añadido margen inferior -->
                 <div class="col-md-6 d-flex align-items-center">
                     <img src="${image || './img/default.jpg'}" class="img-fluid" style="width: 80px; margin-right: 10px;">
                     <div>
