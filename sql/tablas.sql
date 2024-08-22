@@ -9,7 +9,7 @@
 
 
 	create table sub_articulo (
-	idsubartic int primary key references articulos (idarticulo),
+	idsubartic int references articulos (idarticulo),
 	descripcion nvarchar(200),
 	estatus nvarchar(20),
 	fechacreate datetime,
@@ -21,6 +21,8 @@
 	ALTER TABLE sub_articulo ADD codarticulo VARCHAR(50);
 	ALTER TABLE sub_articulo ADD ind_principal VARCHAR(1);
 	ALTER TABLE sub_articulo ADD grupo_principal int;
+	ALTER TABLE sub_articulo ADD precio numeric(10,2);
+
 
 	create table usuarios (
 codigo nvarchar(50),

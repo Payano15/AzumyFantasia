@@ -88,75 +88,90 @@
 </main>
 
 <script>
-    // Manejar la visibilidad del GroupBox
-    document.getElementById('show-on-homepage').addEventListener('change', function() {
-        const groupBox = document.getElementById('group-box');
-        groupBox.style.display = this.checked ? 'block' : 'none';
-    });
+// Manejar la visibilidad del GroupBox
+document.getElementById('show-on-homepage').addEventListener('change', function() {
+    const groupBox = document.getElementById('group-box');
+    groupBox.style.display = this.checked ? 'block' : 'none';
+});
 
-    // Manejar el autocompletado para el nombre del producto
-    document.getElementById('product-name').addEventListener('input', function() {
-        const query = this.value;
-        const resultsContainer = document.getElementById('autocomplete-results');
-        const inputRect = this.getBoundingClientRect();
+// Función debounce para optimizar la búsqueda
+function debounce(func, delay) {
+    let timeout;
+    return function(...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(this, args), delay);
+    };
+}
 
-        if (query.length > 2) {
-            fetch(`../php/search.php?q=${encodeURIComponent(query)}`)
-                .then(response => response.json())
-                .then(data => {
-                    resultsContainer.innerHTML = '';
-                    if (data.length > 0) {
-                        data.forEach(product => {
-                            const resultItem = document.createElement('div');
-                            resultItem.textContent = product.articulo;
-                            resultItem.addEventListener('click', function() {
-                                document.getElementById('product-name').value = product.articulo;
-                                document.getElementById('product-id').value = product.id;
-                                document.getElementById('product-code').value = product.codarticulo;
-                                resultsContainer.style.display = 'none';
-                            });
-                            resultsContainer.appendChild(resultItem);
+// Manejar el autocompletado para el nombre del producto
+document.getElementById('product-name').addEventListener('input', debounce(function() {
+    const query = this.value;
+    const resultsContainer = document.getElementById('autocomplete-results');
+    const inputRect = this.getBoundingClientRect();
+
+    if (query.length > 2) {
+        fetch(`../php/search.php?q=${encodeURIComponent(query)}`)
+            .then(response => response.json())
+            .then(data => {
+                resultsContainer.innerHTML = '';
+                if (data.length > 0) {
+                    data.forEach(product => {
+                        const resultItem = document.createElement('div');
+                        resultItem.textContent = `${product.articulo} (Código: ${product.codarticulo})`;
+                        resultItem.addEventListener('click', function() {
+                            document.getElementById('product-name').value = product.articulo;
+                            document.getElementById('product-id').value = product.idarticulo;
+                            document.getElementById('product-code').value = product.codarticulo;
+                            resultsContainer.style.display = 'none';
                         });
+                        resultsContainer.appendChild(resultItem);
+                    });
 
-                        // Ajustar la posición del panel de autocompletado
-                        resultsContainer.style.display = 'block';
-                        resultsContainer.style.top = `${inputRect.bottom + window.scrollY}px`;
-                        resultsContainer.style.left = `${inputRect.left + window.scrollX}px`;
-                        resultsContainer.style.width = `${inputRect.width}px`;
-                    } else {
-                        resultsContainer.style.display = 'none';
-                    }
-                })
-                .catch(error => console.error('Error:', error));
+                    resultsContainer.style.display = 'block';
+                    resultsContainer.style.top = `${inputRect.bottom + window.scrollY}px`;
+                    resultsContainer.style.left = `${inputRect.left + window.scrollX}px`;
+                    resultsContainer.style.width = `${inputRect.width}px`;
+                } else {
+                    resultsContainer.style.display = 'none';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error al buscar el producto. Verifica la Consola del Navegador para más detalles.');
+            });
+    } else {
+        resultsContainer.style.display = 'none';
+    }
+}, 300)); // Ajusta el retraso según sea necesario
+
+// Manejar el envío del formulario
+document.getElementById('product-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Evitar el envío por defecto del formulario
+
+    const formData = new FormData(this); // Captura los datos del formulario
+
+    fetch('../conexion.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            alert('Producto guardado exitosamente.'); // Mostrar mensaje de éxito
+            // Limpiar los campos del formulario
+            document.getElementById('product-form').reset();
+            document.getElementById('autocomplete-results').innerHTML = '';
+            document.getElementById('group-box').style.display = 'none';
         } else {
-            resultsContainer.style.display = 'none';
+            alert('Error al guardar el producto. Verifica la Consola del Navegador para más detalles.'); // Mostrar mensaje de error
+            console.error('Error al guardar el producto:', data.message); // Mostrar mensaje en la consola
         }
+    })
+    .catch(error => {
+        alert('Error al guardar el producto. Verifica la Consola del Navegador para más detalles.'); // Mostrar mensaje de error
+        console.error('Error:', error); // Mostrar error en la consola
     });
-
-    // Manejar el envío del formulario
-    document.getElementById('product-form').addEventListener('submit', function(event) {
-        event.preventDefault(); // Evitar el envío por defecto del formulario
-
-        const formData = new FormData(this); // Captura los datos del formulario
-
-        fetch('../conexion.php', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                alert('Producto guardado exitosamente.'); // Mostrar mensaje de éxito
-            } else {
-                alert('Error al guardar el producto.'); // Mostrar mensaje de error
-                console.error('Error al guardar el producto:', data.message); // Mostrar mensaje en la consola
-            }
-        })
-        .catch(error => {
-            alert('Error al guardar el producto.'); // Mostrar mensaje de error
-            console.error('Error:', error); // Mostrar error en la consola
-        });
-    });
+});
 </script>
 
 <footer class="text-center py-4">

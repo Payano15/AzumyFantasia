@@ -50,7 +50,7 @@ while ($row = $result->fetch_assoc()) {
     $articles[] = $row;
 }
 
-// Devolver resultados como JSON
+// Devolver resultados como JSON, incluyendo idarticulo y codarticulo
 header('Content-Type: application/json');
 echo json_encode($articles);
 
