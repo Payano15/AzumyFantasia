@@ -1,0 +1,77 @@
+
+{
+    "productos": [
+      {
+        "id": "1",
+        "image": "../img/anillo/anillo.jpg",
+        "descripcion": "Descripción breve del producto 1. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "precio": "$29.99"
+      },
+      {
+        "id": "2",
+        "image": "../img/anillo/anillos.jpg",
+        "descripcion": "Descripción breve del producto 2. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "precio": "$49.99"
+      },
+      {
+        "id": "3",
+        "image": "../img/aretes y cadenas/aretes y cadenas.jpg",
+        "descripcion": "Descripción breve del producto 3. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "precio": "$19.99"
+      },
+      {
+        "id": "4",
+        "image": "../img/aretes/aretes.jpg",
+        "descripcion": "Descripción breve del producto 4. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "precio": "$19.99"
+      },
+      {
+        "id": "5",
+        "image": "../img/cadenas/cadena.jpg",
+        "descripcion": "Descripción breve del producto 5. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "precio": "$29.99"
+      },
+      {
+        "id": "6",
+        "image":"../img/cadenas/cadena2.jpg",
+        "descripcion": "Descripción breve del producto 6. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "precio": "$49.99"
+      },
+      {
+        "id": "7",
+        "image": "../img/cadenas/cadena3.jpg",
+        "descripcion": "Descripción breve del producto 7. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "precio": "$19.99"
+      },
+      {
+        "id": "8",
+        "image": "../img/cadenas/cadena4.jpg",
+        "descripcion": "Descripción breve del producto 8. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "precio": "$19.99"
+      },
+      {
+        "id": "9",
+        "image": "../img/cadenas/cadena5.jpg",
+        "descripcion": "Descripción breve del producto 9. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "precio": "$29.99"
+      },
+      {
+        "id": "10",
+        "image": "../img/pulceras/pulcera.jpg",
+        "descripcion": "Descripción breve del producto 10. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "precio": "$49.99"
+      },
+      {
+        "id": "11",
+        "image": "../img/pulceras/pulcera2.jpg",
+        "descripcion": "Descripción breve del producto 11. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "precio": "$19.99"
+      },
+      {
+        "id": "12",
+        "image": "../img/pulceras/pulcera3.jpg",
+        "descripcion": "Descripción breve del producto 12. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "precio": "$19.99"
+      }
+    ]
+  }
