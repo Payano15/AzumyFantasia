@@ -18,7 +18,7 @@ body {
 .container {
     flex: auto; /* Permite que el contenedor principal expanda para llenar el espacio disponible */
     padding: 30px; /* Ajustar para crear espacio adicional dentro del contenedor */
-   width: 40%; /* Máxima anchura del contenedor */
+    width: 40%; /* Máxima anchura del contenedor */
     margin: 0 auto; /* Centrar el contenedor */
     text-align: left;
     position:relative;
@@ -52,7 +52,6 @@ main {
     background-color: #8077773f;
     padding: 20px;
 }
-
 
 /* Estilos para las secciones administrativas */
 .admin-section {
@@ -112,6 +111,34 @@ main {
 
 .product-form button:hover {
     background-color: #0056b3;
+}
+
+/* Estilos para el checkbox */
+.product-form input[type="checkbox"] {
+    margin-right: 10px; /* Espacio a la derecha del checkbox */
+}
+
+.product-form .checkbox-label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+}
+
+/* Estilos para el GroupBox (contenedor que aparece al marcar el checkbox) */
+.groupbox {
+    display: none; /* Inicialmente oculto */
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px; /* Bordes redondeados */
+    background-color: rgba(240, 240, 240, 0.9); /* Fondo blanco semi-transparente */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+/* Mostrar el GroupBox si el checkbox está marcado */
+.product-form input[type="checkbox"]:checked ~ .groupbox {
+    display: block;
 }
 
 /* Estilos para el footer */
@@ -188,3 +215,32 @@ nav a:hover {
     height: auto; /* Mantiene la relación de aspecto original de la imagen */
     object-fit: cover; /* Asegura que la imagen cubra el contenedor sin distorsionarse */
 }
+
+/* Estilo para las opciones del groupbox */
+#group-box {
+    background-color: #f8f9fa; /* Color de fondo suave */
+    border: 1px solid #ced4da; /* Borde sutil */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 15px; /* Espacio interno */
+    margin-top: 15px; /* Separación superior */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+}
+
+#group-box h3 {
+    font-size: 18px; /* Tamaño de fuente */
+    margin-bottom: 10px; /* Espacio inferior */
+}
+
+#group-box label {
+    display: block; /* Asegura que la etiqueta esté en una línea separada */
+    margin-bottom: 5px; /* Espacio inferior de la etiqueta */
+}
+
+#group-box select {
+    width: 100%; /* Anchura completa */
+    padding: 10px; /* Espacio interno */
+    border: 1px solid #ced4da; /* Borde */
+    border-radius: 5px; /* Bordes redondeados */
+    font-size: 16px; /* Tamaño de fuente */
+}
+

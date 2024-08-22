@@ -21,7 +21,7 @@ function actualizarTotalCarrito() {
 // Función para cargar los datos del producto
 async function cargarDatosProductos() {
     try {
-        const response = await fetch('../json/productos.json'); // Asegúrate de que la ruta sea correcta
+        const response = await fetch('productos.json'); // Asegúrate de que la ruta sea correcta
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -118,3 +118,5 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+
