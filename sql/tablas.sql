@@ -17,7 +17,7 @@
 	urlimagen nvarchar(max)
 	)
 
-
+	alter table sub_articulo add idsubartic int references articulos (idarticulo)
 	ALTER TABLE sub_articulo ADD codarticulo VARCHAR(50);
 	ALTER TABLE sub_articulo ADD ind_principal VARCHAR(1);
 	ALTER TABLE sub_articulo ADD grupo_principal int;
