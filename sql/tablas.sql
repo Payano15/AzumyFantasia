@@ -23,6 +23,9 @@
 	precio numeric(10,2)
 	)
 
+	ALTER TABLE sub_articulo
+	ADD id INT AUTO_INCREMENT PRIMARY KEY;
+
 	alter table sub_articulo add idsubartic int references articulos (idarticulo)
 	ALTER TABLE sub_articulo ADD codarticulo VARCHAR(50);
 	ALTER TABLE sub_articulo ADD ind_principal VARCHAR(1);
