@@ -10,6 +10,7 @@
 
 
 	create table sub_articulo (
+	id int primary key identity(1,1),
 	idsubartic int ,
 	descripcion nvarchar(200),
 	estatus nvarchar(20),

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,166 +31,336 @@
 </head>
 
 <body>
-<header>
-    <a href="index.html" class="logo">
-        <img src="../img/logos/logo_1-removebg-sin fondo.png" alt="Logo" class="img-fluid">
-    </a>
-    <nav>
-        <a href="../index.html">Inicio</a>
-        <a href="../PRODUCTO/productos.html">Productos</a>
-    </nav>
-</header>
+    <header>
+        <a href="index.html" class="logo">
+            <img src="../img/logos/logo_1-removebg-sin fondo.png" alt="Logo" class="img-fluid">
+        </a>
+        <nav>
+            <a href="../index.html">Inicio</a>
+            <a href="../PRODUCTO/productos.html">Productos</a>
+        </nav>
+    </header>
 
-<main>
-    <div class="container">
-        <div class="admin-section">
-            <h2>Administrar Productos</h2>
-            <form id="product-form" class="product-form" action="../conexion.php" method="POST" enctype="multipart/form-data">
-                <ul class="form-list">
-                    <li style="position: relative;">
-                        <label for="product-name">Nombre del Producto:</label>
-                        <input type="text" id="product-name" name="product-name" placeholder="Nombre del producto" required>
-                        <!-- Contenedor para los resultados de autocompletado -->
-                        <div id="autocomplete-results"></div>
-                        <!-- Campos ocultos para almacenar idarticulo y codarticulo -->
-                        <input type="hidden" id="product-id" name="product-id">
-                        <input type="hidden" id="product-code" name="product-code">
-                    </li>
-                    <li>
-                        <label for="product-description">Descripción:</label>
-                        <textarea id="product-description" name="product-description" rows="4" placeholder="Descripción del producto"></textarea>
-                    </li>
-                    <li>
-                        <label for="product-price">Precio:</label>
-                        <input type="number" id="product-price" name="product-price" placeholder="Precio del producto" step="0.01" required>
-                    </li>
-                    <li>
-                        <label for="product-image">Imagen:</label>
-                        <input type="file" id="product-image" name="product-image" accept="image/*">
-                    </li>
-                    <li>
-                        <label for="show-on-homepage">Mostrar en Inicio:</label>
-                        <input type="checkbox" id="show-on-homepage" name="show-on-homepage">
-                    </li>
-                    <div id="group-box" style="display:none; background-color: #f8f9fa; border: 1px solid #ced4da; border-radius: 5px; padding: 15px; margin-top: 15px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);">
-                        <h3 style="font-size: 18px; margin-bottom: 10px;">Opciones para mostrar en inicio</h3>
-                        <label for="inicioOptions" style="display: block; margin-bottom: 5px;">Seleccione una opción:</label>
-                        <select id="inicioOptions" name="inicioOptions" style="width: 100%; padding: 10px; border: 1px solid #ced4da; border-radius: 5px; font-size: 16px;">
-                            <option value="1">Productos Nuevos</option>
-                            <option value="2">Productos Destacados</option>
-                            <option value="3">Productos más queridos</option>
-                        </select>
-                    </div>
-                </ul>
-                <button type="submit">Guardar Producto</button>
-            </form>
+    <main>
+        <div class="container">
+            <div class="admin-section">
+                <h2>Administrar Productos</h2>
+                <form id="product-form" class="product-form" action="../conexion.php" method="POST"
+                    enctype="multipart/form-data">
+                    <ul class="form-list">
+                        <li style="position: relative;">
+                            <label for="product-name">Nombre del Producto:</label>
+                            <input type="text" id="product-name" name="product-name" placeholder="Nombre del producto"
+                                required>
+                            <!-- Contenedor para los resultados de autocompletado -->
+                            <div id="autocomplete-results"></div>
+                            <!-- Campos ocultos para almacenar idarticulo y codarticulo -->
+                            <input type="hidden" id="product-id" name="product-id">
+                            <input type="hidden" id="product-code" name="product-code">
+                        </li>
+                        <li>
+                            <label for="product-description">Descripción:</label>
+                            <textarea id="product-description" name="product-description" rows="4"
+                                placeholder="Descripción del producto"></textarea>
+                        </li>
+                        <li>
+                            <label for="product-price">Precio:</label>
+                            <input type="number" id="product-price" name="product-price"
+                                placeholder="Precio del producto" step="0.01" required>
+                        </li>
+                        <li>
+                            <label for="product-image">Imagen:</label>
+                            <input type="file" id="product-image" name="product-image" accept="image/*">
+                        </li>
+                        <li>
+                            <label for="show-on-homepage">Mostrar en Inicio:</label>
+                            <input type="checkbox" id="show-on-homepage" name="show-on-homepage">
+                        </li>
+                        <div id="group-box"
+                            style="display:none; background-color: #f8f9fa; border: 1px solid #ced4da; border-radius: 5px; padding: 15px; margin-top: 15px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);">
+                            <h3 style="font-size: 18px; margin-bottom: 10px;">Opciones para mostrar en inicio</h3>
+                            <label for="inicioOptions" style="display: block; margin-bottom: 5px;">Seleccione una
+                                opción:</label>
+                            <select id="inicioOptions" name="inicioOptions"
+                                style="width: 100%; padding: 10px; border: 1px solid #ced4da; border-radius: 5px; font-size: 16px;">
+                                <option value="1">Productos Nuevos</option>
+                                <option value="2">Productos Destacados</option>
+                                <option value="3">Productos más queridos</option>
+                            </select>
+                        </div>
+                    </ul>
+                    <button type="submit">Guardar Producto</button>
+                </form>
+            </div>
         </div>
-    </div>
-</main>
 
-<script>
-// Manejar la visibilidad del GroupBox
-document.getElementById('show-on-homepage').addEventListener('change', function() {
-    const groupBox = document.getElementById('group-box');
-    groupBox.style.display = this.checked ? 'block' : 'none';
-});
+        <div id="group-box">
+            <h3 style="font-size: 18px; margin-bottom: 10px;">Opción de Búsqueda</h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="article-search" class="form-label">Búsqueda de Artículo:</label>
+                    <input type="text" id="article-search" name="article-search" class="form-control"
+                        placeholder="Buscar artículo">
+                </div>
 
-// Función debounce para optimizar la búsqueda
-function debounce(func, delay) {
-    let timeout;
-    return function(...args) {
-        clearTimeout(timeout);
-        timeout = setTimeout(() => func.apply(this, args), delay);
-    };
-}
+                <div class="col-md-6">
+                    <label for="status-filter" class="form-label">Seleccione una opción:</label>
+                    <select id="status-filter" name="status-filter" class="form-control">
+                        <option value="ACT">ACTIVOS</option>
+                        <option value="ANU">ANULADOS</option>
+                    </select>
+                </div>
+            </div>
 
-// Manejar el autocompletado para el nombre del producto
-document.getElementById('product-name').addEventListener('input', debounce(function() {
-    const query = this.value;
-    const resultsContainer = document.getElementById('autocomplete-results');
-    const inputRect = this.getBoundingClientRect();
+            <!-- New section for pagination controls -->
+            <div class="row mt-4">
+                <div class="col-md-12">
+                    <!-- Label to show current page range -->
+                    <div id="page-info" class="mb-3" data-page-index="1">
+                        <span id="firstrow-label">Mostrando <span id="firstrow">1</span> a <span id="lastrow">10</span>
+                            de <span id="totalrows">100</span> resultados</span>
+                    </div>
+                    <!-- Button to go to the next page -->
+                    <button id="next-page" class="btn btn-primary">Siguiente Página</button>
+                </div>
+            </div>
 
-    if (query.length > 2) {
-        fetch(`../php/search.php?q=${encodeURIComponent(query)}`)
-            .then(response => response.json())
-            .then(data => {
-                resultsContainer.innerHTML = '';
-                if (data.length > 0) {
-                    data.forEach(product => {
-                        const resultItem = document.createElement('div');
-                        resultItem.textContent = `${product.articulo} (Código: ${product.codarticulo})`;
-                        resultItem.addEventListener('click', function() {
-                            document.getElementById('product-name').value = product.articulo;
-                            document.getElementById('product-id').value = product.idarticulo;
-                            document.getElementById('product-code').value = product.codarticulo;
-                            resultsContainer.style.display = 'none';
-                        });
-                        resultsContainer.appendChild(resultItem);
-                    });
+            <!-- Container to display search results -->
+            <div id="results-container">
+                <!-- Results will be dynamically inserted here -->
+            </div>
+        </div>
+    </main>
 
-                    resultsContainer.style.display = 'block';
-                    resultsContainer.style.top = `${inputRect.bottom + window.scrollY}px`;
-                    resultsContainer.style.left = `${inputRect.left + window.scrollX}px`;
-                    resultsContainer.style.width = `${inputRect.width}px`;
-                } else {
-                    resultsContainer.style.display = 'none';
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Error al buscar el producto. Verifica la Consola del Navegador para más detalles.');
-            });
-    } else {
-        resultsContainer.style.display = 'none';
-    }
-}, 300)); // Ajusta el retraso según sea necesario
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initial data fetch
+            fetchArticles('', 'ACT', 1);
+        });
 
-// Manejar el envío del formulario
-document.getElementById('product-form').addEventListener('submit', function(event) {
-    event.preventDefault(); // Evitar el envío por defecto del formulario
+        document.getElementById('show-on-homepage').addEventListener('change', function () {
+            const groupBox = document.getElementById('group-box');
+            groupBox.style.display = this.checked ? 'block' : 'none';
+        });
 
-    const formData = new FormData(this); // Captura los datos del formulario
-
-    fetch('../conexion.php', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.status === 'success') {
-            alert('Producto guardado exitosamente.'); // Mostrar mensaje de éxito
-            // Limpiar los campos del formulario
-            document.getElementById('product-form').reset();
-            document.getElementById('autocomplete-results').innerHTML = '';
-            document.getElementById('group-box').style.display = 'none';
-        } else {
-            alert('Error al guardar el producto. Verifica la Consola del Navegador para más detalles.'); // Mostrar mensaje de error
-            console.error('Error al guardar el producto:', data.message); // Mostrar mensaje en la consola
+        function debounce(func, delay) {
+            let timeout;
+            return function (...args) {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(this, args), delay);
+            };
         }
-    })
-    .catch(error => {
-        alert('Error al guardar el producto. Verifica la Consola del Navegador para más detalles.'); // Mostrar mensaje de error
-        console.error('Error:', error); // Mostrar error en la consola
-    });
-});
-</script>
 
-<footer class="text-center py-4">
-    <p>&copy; 2024 azumy Fantasia</p>
-    <div class="social-icons">
-        <a href="https://www.instagram.com/azumyfantasia" target="_blank">
-            <img src="https://img.icons8.com/ios-filled/50/000000/instagram-new.png" alt="Instagram">
-        </a>
-        <a href="https://www.facebook.com/share/xdnLnDHCXizQeDwT/?mibextid=qi2Omg" target="_blank">
-            <img src="https://img.icons8.com/ios-filled/50/000000/facebook-new.png" alt="Facebook">
-        </a>
-        <a href="https://wa.me/tu_numero" target="_blank">
-            <img src="https://img.icons8.com/ios-filled/50/000000/whatsapp.png" alt="WhatsApp">
-        </a>
-        <a href="https://www.tiktok.com/@azumyfantasia?_t=8on0ihPhIer&_r=1" target="_blank">
-            <img src="https://img.icons8.com/ios-filled/50/000000/tiktok.png" alt="TikTok">
-        </a>
-    </div>
-</footer>
+        document.getElementById('product-name').addEventListener('input', debounce(function () {
+            const query = this.value;
+            const resultsContainer = document.getElementById('autocomplete-results');
+            const inputRect = this.getBoundingClientRect();
+
+            if (query.length > 2) {
+                fetch(`../php/search.php?q=${encodeURIComponent(query)}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        resultsContainer.innerHTML = '';
+                        if (data.length > 0) {
+                            data.forEach(product => {
+                                const resultItem = document.createElement('div');
+                                resultItem.textContent = `${product.articulo} (Código: ${product.codarticulo})`;
+                                resultItem.addEventListener('click', function () {
+                                    document.getElementById('product-name').value = product.articulo;
+                                    document.getElementById('product-id').value = product.idarticulo;
+                                    document.getElementById('product-code').value = product.codarticulo;
+                                    resultsContainer.style.display = 'none';
+                                });
+                                resultsContainer.appendChild(resultItem);
+                            });
+
+                            resultsContainer.style.display = 'block';
+                            resultsContainer.style.top = `${inputRect.bottom + window.scrollY}px`;
+                            resultsContainer.style.left = `${inputRect.left + window.scrollX}px`;
+                            resultsContainer.style.width = `${inputRect.width}px`;
+                        } else {
+                            resultsContainer.style.display = 'none';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Error al buscar el producto. Verifica la Consola del Navegador para más detalles.');
+                    });
+            } else {
+                resultsContainer.style.display = 'none';
+            }
+        }, 300));
+
+        document.getElementById('product-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const formData = new FormData(this);
+
+            fetch('../conexion.php', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        alert('Producto guardado exitosamente.');
+                        document.getElementById('product-form').reset();
+                        document.getElementById('autocomplete-results').innerHTML = '';
+                        document.getElementById('group-box').style.display = 'none';
+                    } else {
+                        alert('Error al guardar el producto. Verifica la Consola del Navegador para más detalles.');
+                        console.error('Error al guardar el producto:', data.message);
+                    }
+                })
+                .catch(error => {
+                    alert('Error al guardar el producto. Verifica la Consola del Navegador para más detalles.');
+                    console.error('Error:', error);
+                });
+        });
+
+        function fetchArticles(query, status, pageIndex) {
+            fetch(`../php/serch_articulos.php?textosearch=${encodeURIComponent(query)}&estatus=${encodeURIComponent(status)}&pageIndex=${pageIndex}&pageSize=10`)
+                .then(response => response.json())
+                .then(data => {
+                    displayResults(data.results);
+                    updatePagination(data.totalrows, data.firstrow, data.lastrow);
+                })
+                .catch(error => {
+                    console.error('Error fetching articles:', error);
+                });
+        }
+
+        function displayResults(results) {
+            console.log(results); // Añade esta línea para verificar los datos
+            const resultsContainer = document.getElementById('results-container');
+            resultsContainer.innerHTML = '';
+
+            results.forEach(result => {
+                console.log(result); // Verifica cada objeto result
+
+                // Usa el campo urlimagen si está disponible, de lo contrario, usa una imagen predeterminada
+                const imageUrl = result.urlimagen ? `../uploads/${result.urlimagen}` : '../uploads/default-image.png';
+
+                const resultDiv = document.createElement('div');
+                resultDiv.classList.add('result-item');
+
+                resultDiv.innerHTML = `
+            <h4>${result.articulo}</h4>
+            <p>Descripcion: ${result.desc_articulo}</p>
+            <p>Precio: ${result.precio}</p>
+            <img src="${imageUrl}" alt="${result.desc_articulo || 'Imagen'}" style="max-width: 100px;">
+            <button class="edit-button" data-id="${result.id}" data-id-subartic="${result.idsubartic}">
+                <img src="../img/iconos/editar.png" alt="Editar" style="width: 20px; height: 20px;">
+            </button>
+        `;
+                resultsContainer.appendChild(resultDiv);
+            });
+
+            // Agrega un manejador de eventos para los botones de edición
+            document.querySelectorAll('.edit-button').forEach(button => {
+                button.addEventListener('click', function () {
+                    const id = this.getAttribute('data-id');
+                    const idSubartic = this.getAttribute('data-id-subartic');
+                    loadProductData(id, idSubartic);
+                });
+            });
+        }
+
+        function loadProductData(id, idSubartic) {
+            console.log('Loading product data for id:', id, 'and idSubartic:', idSubartic);
+
+            fetch(`../php/get_product.php?id=${id}&idsubartic=${idSubartic}`)
+                .then(response => {
+                    console.log('Response status:', response.status);
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Fetched data:', data);
+                    if (data) {
+                        // Llena los campos del formulario con los datos del producto
+                        document.getElementById('product-name').value = data.articulo;
+                        document.getElementById('product-id').value = data.idarticulo;
+                        document.getElementById('product-code').value = data.codarticulo;
+                        document.getElementById('product-description').value = data.descripcion;
+                        document.getElementById('product-price').value = data.precio;
+
+                        // Verifica el valor de `ind_principal` y ajusta la visibilidad del grupo de opciones
+                        const groupBox = document.getElementById('group-box');
+                        if (data.ind_principal === 'S') {
+                            groupBox.style.display = 'block';
+                            document.getElementById('show-on-homepage').checked = true;
+                        } else {
+                            groupBox.style.display = 'none';
+                            document.getElementById('show-on-homepage').checked = false;
+                        }
+
+                        // Ajusta el valor del select basado en `data.grupo_principal`
+                        const inicioOptions = document.getElementById('inicioOptions');
+                        const grupoPrincipalValue = data.grupo_principal.toString(); // Convertir a cadena si es necesario
+                        let optionFound = false;
+
+                        for (let i = 0; i < inicioOptions.options.length; i++) {
+                            if (inicioOptions.options[i].value === grupoPrincipalValue) {
+                                inicioOptions.selectedIndex = i;
+                                optionFound = true;
+                                break;
+                            }
+                        }
+
+                        if (!optionFound) {
+                            console.log('No matching option found for grupo_principal value.');
+                        }
+
+                    } else {
+                        console.log('No data found for the selected product.');
+                        alert('No se encontraron datos para el producto seleccionado.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching product data:', error);
+                    alert('Error al recuperar los datos del producto.');
+                });
+        }
+
+
+        function updatePagination(totalrows, firstrow, lastrow) {
+            document.getElementById('totalrows').textContent = totalrows;
+            document.getElementById('firstrow').textContent = firstrow;
+            document.getElementById('lastrow').textContent = lastrow;
+            document.getElementById('page-info').dataset.pageIndex = Math.ceil(firstrow / 10);
+        }
+
+        document.getElementById('next-page').addEventListener('click', function () {
+            const pageIndex = parseInt(document.getElementById('page-info').dataset.pageIndex);
+            fetchArticles(document.getElementById('article-search').value, document.getElementById('status-filter').value, pageIndex + 1);
+        });
+
+        document.getElementById('article-search').addEventListener('input', function () {
+            fetchArticles(this.value, document.getElementById('status-filter').value, 1);
+        });
+
+        document.getElementById('status-filter').addEventListener('change', function () {
+            fetchArticles(document.getElementById('article-search').value, this.value, 1);
+        });
+    </script>
+
+    <footer class="text-center py-4">
+        <p>&copy; 2024 azumy Fantasia</p>
+        <div class="social-icons">
+            <a href="https://www.instagram.com/azumyfantasia" target="_blank">
+                <img src="https://img.icons8.com/ios-filled/50/000000/instagram-new.png" alt="Instagram">
+            </a>
+            <a href="https://www.facebook.com/share/xdnLnDHCXizQeDwT/?mibextid=qi2Omg" target="_blank">
+                <img src="https://img.icons8.com/ios-filled/50/000000/facebook-new.png" alt="Facebook">
+            </a>
+            <a href="https://wa.me/tu_numero" target="_blank">
+                <img src="https://img.icons8.com/ios-filled/50/000000/whatsapp.png" alt="WhatsApp">
+            </a>
+            <a href="https://www.tiktok.com/@azumyfantasia?_t=8on0ihPhIer&_r=1" target="_blank">
+                <img src="https://img.icons8.com/ios-filled/50/000000/tiktok.png" alt="TikTok">
+            </a>
+        </div>
+    </footer>
 </body>
+
 </html>
