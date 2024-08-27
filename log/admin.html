@@ -7,7 +7,27 @@
     <link rel="icon" href="../img/logos/logo 1.jpeg" type="image/x-icon">
     <title>Editar Productos</title>
     <link rel="stylesheet" href="../log/admin.css">
-   
+    <style>
+        /* Estilo para el contenedor de resultados de autocompletado */
+        #autocomplete-results {
+            position: absolute;
+            border: 1px solid #ced4da;
+            background-color: #ffffff;
+            z-index: 1000;
+            max-height: 150px;
+            overflow-y: auto;
+            width: 100%;
+        }
+
+        #autocomplete-results div {
+            padding: 8px;
+            cursor: pointer;
+        }
+
+        #autocomplete-results div:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
 </head>
 
 <body>
@@ -30,14 +50,14 @@
                     <ul class="form-list">
                         <li style="position: relative;">
                             <label for="product-name">Nombre del Producto:</label>
-                            <input type="text" id="product-name" name="product-name" placeholder="Nombre del producto" required>
-                            <!-- Contenedor para los resultados de autocompletado, ahora debajo del campo de texto -->
+                            <input type="text" id="product-name" name="product-name" placeholder="Nombre del producto"
+                                required>
+                            <!-- Contenedor para los resultados de autocompletado -->
                             <div id="autocomplete-results"></div>
                             <!-- Campos ocultos para almacenar idarticulo y codarticulo -->
                             <input type="hidden" id="product-id" name="product-id">
                             <input type="hidden" id="product-code" name="product-code">
                         </li>
-                        
                         <li>
                             <label for="product-description">Descripción:</label>
                             <textarea id="product-description" name="product-description" rows="4"
@@ -143,77 +163,78 @@
         }
 
         document.getElementById('product-name').addEventListener('input', debounce(function () {
-    const query = this.value;
-    const resultsContainer = document.getElementById('autocomplete-results');
-    const inputRect = this.getBoundingClientRect();
-    const containerRect = this.parentNode.getBoundingClientRect(); // Obtener el contenedor `li`
+            const query = this.value;
+            const resultsContainer = document.getElementById('autocomplete-results');
+            const inputRect = this.getBoundingClientRect();
 
-    if (query.length > 2) {
-        fetch(`../php/search.php?q=${encodeURIComponent(query)}`)
-            .then(response => response.json())
-            .then(data => {
-                resultsContainer.innerHTML = '';
-                if (data.length > 0) {
-                    data.forEach(product => {
-                        const resultItem = document.createElement('div');
-                        resultItem.textContent = `${product.articulo} (Código: ${product.codarticulo})`;
-                        resultItem.addEventListener('click', function () {
-                            document.getElementById('product-name').value = product.articulo;
-                            document.getElementById('product-id').value = product.idarticulo;
-                            document.getElementById('product-code').value = product.codarticulo;
+            if (query.length > 2) {
+                fetch(`../php/search.php?q=${encodeURIComponent(query)}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        resultsContainer.innerHTML = '';
+                        if (data.length > 0) {
+                            data.forEach(product => {
+                                const resultItem = document.createElement('div');
+                                resultItem.textContent = `${product.articulo} (Código: ${product.codarticulo})`;
+                                resultItem.addEventListener('click', function () {
+                                    document.getElementById('product-name').value = product.articulo;
+                                    document.getElementById('product-id').value = product.idarticulo;
+                                    document.getElementById('product-code').value = product.codarticulo;
+                                    resultsContainer.style.display = 'none';
+                                });
+                                resultsContainer.appendChild(resultItem);
+                            });
+
+                            resultsContainer.style.display = 'block';
+                            resultsContainer.style.top = `${inputRect.bottom + window.scrollY}px`;
+                            resultsContainer.style.left = `${inputRect.left + window.scrollX}px`;
+                            resultsContainer.style.width = `${inputRect.width}px`;
+                        } else {
                             resultsContainer.style.display = 'none';
-                        });
-                        resultsContainer.appendChild(resultItem);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Error al buscar el producto. Verifica la Consola del Navegador para más detalles.');
                     });
+            } else {
+                resultsContainer.style.display = 'none';
+            }
+        }, 300));
 
-                    resultsContainer.style.display = 'block';
-                    // Ajustar la posición del contenedor para que esté justo debajo del campo de texto con un pequeño margen
-                    resultsContainer.style.top = `${inputRect.height + 30}px`; // Ajusta el margen según sea necesario
-                    resultsContainer.style.left = '0'; // Alineado con el campo de texto
-                    resultsContainer.style.width = `${inputRect.width}px`; // Ancho igual al campo de texto
-                } else {
-                    resultsContainer.style.display = 'none';
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Error al buscar el producto. Verifica la Consola del Navegador para más detalles.');
-            });
-    } else {
-        resultsContainer.style.display = 'none';
-    }
-}, 300));
+        document.addEventListener('DOMContentLoaded', () => {
+            const addProductButton = document.getElementById('add-product-button'); // Asegúrate de que el ID del botón coincida
 
+            // Asegúrate de definir la función handleAddProduct
+            function handleAddProduct() {
+                const form = document.getElementById('product-form');
 
-        document.getElementById('product-form').addEventListener('submit', function (event) {
-            event.preventDefault();
+                const formData = new FormData(form);
 
-            // Establecer el tipo basado en si es una modificación
-            const tipo = document.getElementById('product-id').value ? 'MOD' : 'NEW';
-            document.getElementById('product-type').value = tipo;
-
-            const formData = new FormData(this);
-
-            fetch('../conexion.php', {
-                method: 'POST',
-                body: formData
-            })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.status === 'success') {
-                        alert('Producto guardado exitosamente.');
-                        document.getElementById('product-form').reset();
-                        document.getElementById('autocomplete-results').innerHTML = '';
-                        document.getElementById('group-box').style.display = 'none';
-                    } else {
-                        alert('Error al guardar el producto. Verifica la Consola del Navegador para más detalles.');
-                        console.error('Error al guardar el producto:', data.message);
-                    }
+                fetch('../conexion.php', {
+                    method: 'POST',
+                    body: formData
                 })
-                .catch(error => {
-                    alert('Error al guardar el producto. Verifica la Consola del Navegador para más detalles.');
-                    console.error('Error:', error);
-                });
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'success') {
+                            alert('Producto guardado exitosamente.');
+                            form.reset();
+                            document.getElementById('autocomplete-results').innerHTML = '';
+                            document.getElementById('group-box').style.display = 'none';
+                        } else {
+                            alert('Error al guardar el producto. Verifica la Consola del Navegador para más detalles.');
+                            console.error('Error al guardar el producto:', data.message);
+                        }
+                    })
+                    .catch(error => {
+                        alert('Error al guardar el producto. Verifica la Consola del Navegador para más detalles.');
+                        console.error('Error:', error);
+                    });
+            }
+
+            // Asocia el evento click al botón de agregar producto
+            addProductButton.addEventListener('click', handleAddProduct);
         });
 
         function fetchArticles(query, status, pageIndex) {
@@ -240,20 +261,57 @@
             previewContainer.style.display = 'block';
         }
 
-        // Función para manejar los resultados de búsqueda y mostrar productos
+        // Espera a que el DOM esté completamente cargado
+        document.addEventListener('DOMContentLoaded', () => {
+            const statusFilter = document.getElementById('status-filter');
+            const resultsContainer = document.getElementById('results-container');
+
+            // Función para manejar el cambio en el filtro
+            statusFilter.addEventListener('change', () => {
+                // Llama a la función que obtiene los resultados (puede ser una llamada fetch o similar)
+                fetchResults();
+            });
+
+            // Función para obtener los resultados (ejemplo, modifica según tu implementación)
+            function fetchResults() {
+                // Aquí deberías obtener los resultados, por ejemplo, con fetch
+                fetch('../conexion.php')
+                    .then(response => response.json())
+                    .then(data => {
+                        displayResults(data.results);
+                    })
+                    .catch(error => console.error('Error fetching results:', error));
+            }
+
+            // Inicialmente carga los resultados cuando se carga la página
+            fetchResults();
+        });
+
+        // Función para mostrar los resultados
         function displayResults(results) {
             console.log(results); // Verifica los datos recibidos
             const resultsContainer = document.getElementById('results-container');
             resultsContainer.innerHTML = '';
 
+            // Captura el valor del filtro de estado
+            const filterValue = document.getElementById('status-filter').value;
+
             results.forEach(result => {
                 console.log(result); // Verifica cada objeto result
+                console.log('Estatus del resultado:', result.estatus_articulo); // Verifica el valor del estatus_articulo
 
                 // Usa el campo urlimagen si está disponible, de lo contrario, usa una imagen predeterminada
                 const imageUrl = result.urlimagen ? `../uploads/${result.urlimagen}` : '../uploads/default-image.png';
 
                 const resultDiv = document.createElement('div');
                 resultDiv.classList.add('result-item');
+
+                // Verifica el valor del filtro para mostrar el botón de activar
+                const activateButtonHtml = filterValue === 'ANU'
+                    ? `<button class="activar-button" data-id="${result.id}">
+                 <img src="../img/iconos/activar.png" alt="activar" style="width: 20px; height: 20px;">
+                </button>`
+                    : '';
 
                 resultDiv.innerHTML = `
         <div style="display: flex; align-items: center;">
@@ -262,12 +320,18 @@
                 <h4>${result.articulo}</h4>
                 <p>Descripción: ${result.desc_articulo}</p>
                 <p>Precio: ${result.precio}</p>
-                <button class="edit-button" data-id="${result.id}" data-id-subartic="${result.idsubartic}" data-image-url="${imageUrl}">
-                    <img src="../img/iconos/editar.png" alt="Editar" style="width: 20px; height: 20px;">
-                </button>
+                <div style="display: flex; gap: 10px;">
+                    <button class="edit-button" data-id="${result.id}" data-id-subartic="${result.idsubartic}" data-image-url="${imageUrl}">
+                        <img src="../img/iconos/editar.png" alt="Editar" style="width: 20px; height: 20px;">
+                    </button>
+                    <button class="cancel-button" data-id="${result.id}" data-id-subartic="${result.idsubartic}">
+                        <img src="../img/iconos/anular.png" alt="Anular" style="width: 20px; height: 20px;">
+                    </button>
+                    ${activateButtonHtml}
+                </div>
             </div>
         </div>
-        `;
+    `;
                 resultsContainer.appendChild(resultDiv);
             });
 
@@ -281,7 +345,7 @@
                     showEditImage(imageUrl); // Muestra la imagen editada
 
                     // Guardar el tipo como 'MOD'
-                    tipo = 'MOD';
+                    const tipo = 'MOD';
                     console.log('Tipo:', tipo); // Verifica el valor en la consola
 
                     // Mostrar el label con el ID del producto
@@ -295,7 +359,176 @@
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 });
             });
+
+            // Agrega un manejador de eventos para los botones de anulación
+            document.querySelectorAll('.cancel-button').forEach(button => {
+                button.addEventListener('click', function () {
+                    const id = this.getAttribute('data-id');
+                    const idsubartic = this.getAttribute('data-id-subartic');
+
+                    // Muestra en la consola los valores de id e idsubartic
+                    console.log('ID del producto:', id);
+                    console.log('ID Subartículo:', idsubartic);
+
+                    if (confirm('¿Estás seguro de que deseas anular este producto?')) {
+                        // Actualiza el label con el ID y el ID Subartículo
+                        const productIdLabel = document.getElementById('product-id-label');
+                        if (productIdLabel) {
+                            productIdLabel.textContent = `ID: ${id} / ID Subartículo: ${idsubartic}`;
+                            productIdLabel.style.display = 'inline'; // Muestra el label
+                        }
+                        cancelProduct(id, idsubartic);
+                    }
+                });
+            });
+
+            // Agrega un manejador de eventos para los botones de activación
+            document.querySelectorAll('.activar-button').forEach(button => {
+                button.addEventListener('click', function () {
+                    const id = this.getAttribute('data-id');
+                    if (confirm('¿Estás seguro de que deseas activar este producto?')) {
+                        // Actualiza el label con el ID del producto
+                        const productIdLabel = document.getElementById('product-id-label');
+                        if (productIdLabel) {
+                            productIdLabel.textContent = `ID: ${id}`;
+                            productIdLabel.style.display = 'inline'; // Muestra el label
+                        }
+                        activateProduct(id);
+                    }
+                });
+            });
         }
+
+
+
+        // Función para actualizar los resultados según el filtro
+        function updateResults() {
+            // Aquí deberías hacer una llamada a tu API o fuente de datos para obtener los resultados
+            // Usando el valor del filtro actual (filterValue)
+            fetchResults(filterValue).then(results => displayResults(results));
+        }
+
+        // Ejemplo de función para obtener los resultados basados en el filtro
+        function fetchResults(status) {
+            // Implementa aquí tu lógica para obtener resultados basados en el estatus
+            return fetch(`/api/products?status=${status}`)
+                .then(response => response.json());
+        }
+
+
+        // Función para actualizar los resultados según el filtro
+        function updateResults() {
+            // Aquí deberías hacer una llamada a tu API o fuente de datos para obtener los resultados
+            // Usando el valor del filtro actual (filterValue)
+            fetchResults(filterValue).then(results => displayResults(results));
+        }
+
+        // Ejemplo de función para obtener los resultados basados en el filtro
+        function fetchResults(status) {
+            // Implementa aquí tu lógica para obtener resultados basados en el estatus
+            return fetch(`/api/products?status=${status}`)
+                .then(response => response.json());
+        }
+
+        // Función para actualizar los resultados según el filtro
+        function updateResults() {
+            // Aquí deberías hacer una llamada a tu API o fuente de datos para obtener los resultados
+            // Usando el valor del filtro actual (filterValue)
+            fetchResults(filterValue).then(results => displayResults(results));
+        }
+
+        // Ejemplo de función para obtener los resultados basados en el filtro
+        function fetchResults(status) {
+            // Implementa aquí tu lógica para obtener resultados basados en el estatus
+            return fetch(`/api/products?status=${status}`)
+                .then(response => response.json());
+        }
+
+
+        // Manejador de eventos para el botón de anulación
+        document.querySelectorAll('.cancel-button').forEach(button => {
+            button.addEventListener('click', function () {
+                const id = this.getAttribute('data-id');
+                const idsubartic = this.getAttribute('data-id-subartic');
+
+                // Muestra en la consola los valores de id e idsubartic
+                console.log('ID del producto:', id);
+                console.log('ID Subartículo:', idsubartic);
+
+                if (confirm('¿Estás seguro de que deseas anular este producto?')) {
+                    // Actualiza el label con el ID y el ID Subartículo
+                    const productIdLabel = document.getElementById('product-id-label');
+                    if (productIdLabel) {
+                        productIdLabel.textContent = `ID: ${id} / ID Subartículo: ${idsubartic}`;
+                        productIdLabel.style.display = 'inline'; // Muestra el label
+                    }
+
+                    // Llama a la función cancelProduct con los valores del label
+                    cancelProduct(id, idsubartic);
+                }
+            });
+        });
+
+        function cancelProduct(id, idsubartic) {
+            // Verifica que los parámetros no estén vacíos, sean numéricos y enteros válidos
+            if (!id || !idsubartic || isNaN(id) || isNaN(idsubartic) ||
+                !Number.isInteger(parseInt(id)) || !Number.isInteger(parseInt(idsubartic))) {
+                alert('ID del producto o ID Subartículo no válidos.');
+                return; // Detiene la ejecución de la función
+            }
+
+            // Muestra en la consola los valores de id e idsubartic
+            console.log('Anulando producto con ID:', id, 'y ID Subartículo:', idsubartic);
+
+            // Crea el objeto JSON que se enviará en la solicitud
+            const requestData = {
+                id: id,
+                idsubartic: idsubartic
+            };
+            console.log('Datos enviados:', JSON.stringify(requestData));
+
+            // Realiza la solicitud fetch
+            fetch('../anular_articulos.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(requestData) // Envía los datos como JSON
+            })
+                .then(response => {
+                    // Verifica si la respuesta es exitosa
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json(); // Parsear la respuesta JSON
+                })
+                .then(data => {
+                    // Manejo de la respuesta del servidor
+                    if (data.success) {
+                        alert('Producto anulado con éxito');
+                        loadProducts(); // Actualiza la lista de productos
+                    } else {
+                        alert('Hubo un problema al anular el producto: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    // Manejo de errores
+                    console.error('Error:', error);
+                });
+        }
+
+
+        // Ejemplo de uso
+        document.querySelectorAll('.cancel-button').forEach(button => {
+            button.addEventListener('click', function () {
+                const id = this.getAttribute('data-id');
+                const idsubartic = this.getAttribute('data-id-subartic'); // Asegúrate de tener este atributo en el botón
+                if (confirm(`¿Estás seguro de que deseas anular el producto con ID ${id} y ID Subartic ${idsubartic}?`)) {
+                    cancelProduct(id, idsubartic);
+                }
+            });
+        });
+
 
 
         // Función para manejar la edición de un producto
@@ -313,100 +546,6 @@
             }
         }
 
-        async function handleAddProduct() {
-            const productForm = document.getElementById('product-form'); // Asegúrate de que el ID del formulario coincida
-
-            // Obtén el ID del producto del label
-            const productId = document.getElementById('product-id-label').textContent;
-
-            // Recoge los datos del formulario
-            const formData = new FormData(productForm);
-
-            // Añade el ID del producto al FormData
-            formData.append('product-id', productId);
-
-            // Añade el tipo MOD al FormData
-            formData.append('type', 'MOD');
-
-            // Añade el campo ind_principal (es decir, si el producto debe mostrarse en la página principal)
-            formData.append('ind_principal', document.getElementById('show-on-homepage').checked ? '1' : '0');
-
-            // Añade un valor por defecto para p_grupo si es necesario (puedes cambiar esto según tus requisitos)
-            formData.append('grupo', 'default'); // Cambia 'default' según lo necesario
-
-            // Imprimir los datos de FormData en la consola
-            console.log('Datos enviados al procedimiento:');
-            formData.forEach((value, key) => {
-                console.log(`${key}: ${value}`);
-            });
-
-            try {
-                const response = await fetch('../php/mod_articulos.php', { // Cambia la ruta al script PHP correcto
-                    method: 'POST',
-                    body: formData
-                });
-
-                // Verifica el código de estado de la respuesta
-                if (!response.ok) {
-                    throw new Error('Error en la solicitud: ' + response.statusText);
-                }
-
-                const result = await response.json();
-
-                // Imprime la respuesta del servidor en la consola
-                console.log('Respuesta del servidor:', result);
-
-                // Maneja la respuesta
-                if (result.status === 'success') {
-                    alert(`Producto guardado exitosamente: ${result.message}`);
-
-                    // Llama a displayResults para mostrar la información actualizada
-                    displayResults(result.data);
-                } else {
-                    alert(`Error al guardar el producto: ${result.message}`);
-                }
-            } catch (error) {
-                console.error('Error al enviar los datos:', error);
-            }
-        }
-
-        // // Función para enviar el formulario y buscar el producto
-        // async function handleAddProduct() {
-        //     const productForm = document.getElementById('product-form'); // Asegúrate de que el ID del formulario coincida
-
-        //     // Recoge los datos del formulario
-        //     const formData = new FormData(productForm);
-
-        //     // Añade el tipo MOD al FormData
-        //     formData.append('type', 'MOD');
-
-        //     // Imprimir los datos de FormData en la consola
-        //     console.log('Datos enviados al procedimiento:');
-        //     formData.forEach((value, key) => {
-        //         console.log(`${key}: ${value}`);
-        //     });
-
-        //     try {
-        //         const response = await fetch('../php/mod_articulos.php', { // Cambia la ruta al script PHP correcto
-        //             method: 'POST',
-        //             body: formData
-        //         });
-
-        //         const result = await response.json();
-
-        //         // Maneja la respuesta
-        //         if (result.status === 'success') {
-        //             alert(`Producto guardado exitosamente: ${result.message}`);
-
-        //             // Llama a displayResults para mostrar la información actualizada
-        //             displayResults(result.data);
-        //         } else {
-        //             alert(`Error al guardar el producto: ${result.message}`);
-        //         }
-        //     } catch (error) {
-        //         console.error('Error al enviar los datos:', error);
-        //     }
-        // }
 
         // Espera a que el DOM esté completamente cargado
         document.addEventListener('DOMContentLoaded', () => {
@@ -415,9 +554,6 @@
             // Asocia el evento click al botón de agregar producto
             addProductButton.addEventListener('click', handleAddProduct);
         });
-
-
-
 
         function loadProductData(id, idSubartic) {
             console.log('Loading product data for id:', id, 'and idSubartic:', idSubartic);
@@ -473,6 +609,86 @@
                     console.error('Error fetching product data:', error);
                     alert('Error al recuperar los datos del producto.');
                 });
+        }
+
+        // Función para activar un producto
+        function activateProduct() {
+            // Obtener el ID del elemento con id="product-id-label"
+            const productIdLabel = document.getElementById('product-id-label');
+            if (!productIdLabel) {
+                alert('No se encontró el ID del producto.');
+                return;
+            }
+            const id = productIdLabel.textContent.replace('ID: ', '').trim(); // Extraer el ID del texto
+
+            // Confirmar la acción con el usuario
+            if (confirm('¿Estás seguro de que deseas activar este producto?')) {
+                // Configurar la solicitud
+                fetch('../php/activar_articulo.php', { // Actualiza la ruta al archivo PHP según tu estructura
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ id: id })
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        // Manejar la respuesta del servidor
+                        if (data.status === 'success') {
+                            alert(data.message);
+                            // Actualizar la vista o hacer cualquier otra acción después de activar el producto
+                            updateResults(); // Llama a la función para actualizar los resultados, si es necesario
+                        } else {
+                            alert(data.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Se produjo un error al activar el producto.');
+                    });
+            }
+        }
+
+        //funcion para anular articulos 
+        function cancelProduct(id) {
+            fetch(`../php/anular_articulos.php`, {
+                method: 'POST',
+                body: JSON.stringify({ id: id }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => response.text()) // Leer la respuesta como texto
+                .then(text => {
+                    try {
+                        const data = JSON.parse(text); // Intentar parsear el texto a JSON
+                        if (data.status === 'success') {
+                            alert(data.message); // Muestra el mensaje devuelto por PHP
+                            // Actualiza la lista de resultados después de la anulación
+                            updateResults(); // Asegúrate de tener una función que recargue los datos actualizados
+                        } else {
+                            alert('Error al anular el producto: ' + data.message);
+                        }
+                    } catch (e) {
+                        console.error('Error al parsear JSON:', e);
+                        console.error('Respuesta del servidor:', text);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error al anular el producto:', error);
+                });
+        }
+
+        // Función para actualizar los resultados después de una anulación
+        function updateResults() {
+            // Aquí puedes agregar la lógica para recargar los datos de la lista de productos.
+            // Por ejemplo, podrías llamar de nuevo a la función que obtiene y muestra los productos.
+        }
+
+        // Función para actualizar los resultados después de una anulación
+        function updateResults() {
+            // Aquí puedes agregar la lógica para recargar los datos de la lista de productos.
+            // Por ejemplo, podrías llamar de nuevo a la función que obtiene y muestra los productos.
         }
 
 

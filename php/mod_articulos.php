@@ -37,11 +37,11 @@ if ($conn->connect_error) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Obtener los datos del formulario
     $productId = $_POST['product-id'] ?? null;
-    $productName = trim($_POST['product-name']);
-    $productDescription = $_POST['product-description'];
-    $productPrice = $_POST['product-price'];
+    $productDescription = $_POST['product-description'] ?? '';
+    $productPrice = $_POST['product-price'] ?? '';
     $showOnHomepage = isset($_POST['show-on-homepage']) ? 'S' : 'N';
-    $inicioOptions = $_POST['inicioOptions'] ?? null;
+    $grupo = $_POST['grupo'] ?? 'default'; // Se asume que 'default' es el valor por defecto
+    $type = $_POST['type'] ?? ''; // Asegúrate de que 'type' sea el tipo de operación (MOD o algo más)
 
     // Manejar la imagen
     $productImage = null;
@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Preparar la llamada al procedimiento almacenado
-    $sql = "CALL usp_manage_productos(?, ?, ?, ?, ?, ?, @o_message)";
+    $sql = "CALL usp_manage_productos(?, ?, ?, ?, ?, ?, ?, @o_message)";
     $stmt = $conn->prepare($sql);
     if (!$stmt) {
         header('Content-Type: application/json');
@@ -75,13 +75,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Bind los parámetros
     $stmt->bind_param(
-        'isdsss',
+        'isssssi',
         $productId,             // ID del producto
         $productDescription,    // Descripción del producto
         $productPrice,          // Precio del producto
         $productImage,          // Imagen del producto (URL de la imagen)
         $showOnHomepage,        // Mostrar en la página principal (S o N)
-        $inicioOptions         // Opciones de inicio
+        $grupo,                 // Grupo
+        $type                   // Tipo de operación (MOD o algo más)
     );
 
     // Ejecutar el procedimiento
