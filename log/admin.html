@@ -5,29 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../img/logos/logo 1.jpeg" type="image/x-icon">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <title>Editar Productos</title>
     <link rel="stylesheet" href="../log/admin.css">
-    <style>
-        /* Estilo para el contenedor de resultados de autocompletado */
-        #autocomplete-results {
-            position: absolute;
-            border: 1px solid #ced4da;
-            background-color: #ffffff;
-            z-index: 1000;
-            max-height: 150px;
-            overflow-y: auto;
-            width: 100%;
-        }
-
-        #autocomplete-results div {
-            padding: 8px;
-            cursor: pointer;
-        }
-
-        #autocomplete-results div:hover {
-            background-color: #f1f1f1;
-        }
-    </style>
 </head>
 
 <body>
@@ -97,6 +77,7 @@
                     </ul>
                     <div style="display: flex; align-items: center; gap: 10px;">
                         <button id="add-product-button" type="button">Guardar Producto</button>
+                        <button id="Mod-product-button" type="button" style="display: none;">Modificar Producto</button>
                         <!-- Añadir el label para mostrar el ID -->
                         <label id="product-id-label" style="font-weight: bold; display: none;">-</label>
                     </div>
@@ -261,31 +242,6 @@
             previewContainer.style.display = 'block';
         }
 
-        // Espera a que el DOM esté completamente cargado
-        document.addEventListener('DOMContentLoaded', () => {
-            const statusFilter = document.getElementById('status-filter');
-            const resultsContainer = document.getElementById('results-container');
-
-            // Función para manejar el cambio en el filtro
-            statusFilter.addEventListener('change', () => {
-                // Llama a la función que obtiene los resultados (puede ser una llamada fetch o similar)
-                fetchResults();
-            });
-
-            // Función para obtener los resultados (ejemplo, modifica según tu implementación)
-            function fetchResults() {
-                // Aquí deberías obtener los resultados, por ejemplo, con fetch
-                fetch('../conexion.php')
-                    .then(response => response.json())
-                    .then(data => {
-                        displayResults(data.results);
-                    })
-                    .catch(error => console.error('Error fetching results:', error));
-            }
-
-            // Inicialmente carga los resultados cuando se carga la página
-            fetchResults();
-        });
 
         // Función para mostrar los resultados
         function displayResults(results) {
@@ -314,24 +270,24 @@
                     : '';
 
                 resultDiv.innerHTML = `
-        <div style="display: flex; align-items: center;">
-            <img src="${imageUrl}" alt="${result.desc_articulo || 'Imagen'}" style="max-width: 100px; margin-right: 10px;">
-            <div>
-                <h4>${result.articulo}</h4>
-                <p>Descripción: ${result.desc_articulo}</p>
-                <p>Precio: ${result.precio}</p>
-                <div style="display: flex; gap: 10px;">
-                    <button class="edit-button" data-id="${result.id}" data-id-subartic="${result.idsubartic}" data-image-url="${imageUrl}">
-                        <img src="../img/iconos/editar.png" alt="Editar" style="width: 20px; height: 20px;">
-                    </button>
-                    <button class="cancel-button" data-id="${result.id}" data-id-subartic="${result.idsubartic}">
-                        <img src="../img/iconos/anular.png" alt="Anular" style="width: 20px; height: 20px;">
-                    </button>
-                    ${activateButtonHtml}
+            <div style="display: flex; align-items: center;">
+                <img src="${imageUrl}" alt="${result.desc_articulo || 'Imagen'}" style="max-width: 100px; margin-right: 10px;">
+                <div>
+                    <h4>${result.articulo}</h4>
+                    <p>Descripción: ${result.desc_articulo}</p>
+                    <p>Precio: ${result.precio}</p>
+                    <div style="display: flex; gap: 10px;">
+                        <button class="edit-button" data-id="${result.id}" data-id-subartic="${result.idsubartic}" data-image-url="${imageUrl}">
+                            <img src="../img/iconos/editar.png" alt="Editar" style="width: 20px; height: 20px;">
+                        </button>
+                        <button class="cancel-button" data-id="${result.id}" data-id-subartic="${result.idsubartic}">
+                            <img src="../img/iconos/anular.png" alt="Anular" style="width: 20px; height: 20px;">
+                        </button>
+                        ${activateButtonHtml}
+                    </div>
                 </div>
             </div>
-        </div>
-    `;
+        `;
                 resultsContainer.appendChild(resultDiv);
             });
 
@@ -353,6 +309,18 @@
                     if (productIdLabel) {
                         productIdLabel.textContent = `${id}`;
                         productIdLabel.style.display = 'inline'; // Muestra el label
+                    }
+
+                    // Ocultar el botón "Guardar Producto"
+                    const addButton = document.getElementById('add-product-button');
+                    if (addButton) {
+                        addButton.style.display = 'none';
+                    }
+
+                    // Mostrar el botón "Modificar Producto"
+                    const modButton = document.getElementById('Mod-product-button');
+                    if (modButton) {
+                        modButton.style.display = 'inline';
                     }
 
                     // Desplazarse hacia el inicio de la página
@@ -398,7 +366,6 @@
                 });
             });
         }
-
 
 
         // Función para actualizar los resultados según el filtro
@@ -545,15 +512,6 @@
                 productIdInput.value = id;
             }
         }
-
-
-        // Espera a que el DOM esté completamente cargado
-        document.addEventListener('DOMContentLoaded', () => {
-            const addProductButton = document.getElementById('add-product-button'); // Asegúrate de que el ID del botón coincida
-
-            // Asocia el evento click al botón de agregar producto
-            addProductButton.addEventListener('click', handleAddProduct);
-        });
 
         function loadProductData(id, idSubartic) {
             console.log('Loading product data for id:', id, 'and idSubartic:', idSubartic);
@@ -711,6 +669,65 @@
         document.getElementById('status-filter').addEventListener('change', function () {
             fetchArticles(document.getElementById('article-search').value, this.value, 1);
         });
+
+        // modificar articulo
+
+        function modifyProduct() {
+            // Captura el ID del producto desde el label
+            const productId = document.getElementById('product-id-label').textContent;
+
+            // Captura los demás datos del formulario (excepto el nombre del producto)
+            const productDescription = document.getElementById('product-description').value;
+            const productPrice = document.getElementById('product-price').value;
+            const showOnHomepage = document.getElementById('show-on-homepage').checked ? 'S' : 'N';
+            const inicioOption = document.getElementById('inicioOptions').value;
+            const productImage = document.getElementById('product-image').files[0];
+
+            // Verifica que el ID del producto esté presente
+            if (!productId) {
+                alert('No se ha seleccionado ningún producto para modificar.');
+                return;
+            }
+
+            // Crea un objeto FormData para enviar los datos incluyendo la imagen
+            const formData = new FormData();
+            formData.append('product-id', productId);
+            formData.append('product-description', productDescription);
+            formData.append('product-price', productPrice);
+            formData.append('show-on-homepage', showOnHomepage);
+            formData.append('inicioOptions', inicioOption);
+
+            // Agrega la imagen solo si se seleccionó una
+            if (productImage) {
+                formData.append('product-image', productImage);
+            }
+
+            // Envía los datos al servidor usando fetch API
+            fetch('../php/mod_articulos.php', {
+                method: 'POST',
+                body: formData,
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Producto modificado con éxito.');
+                        // Puedes agregar lógica adicional aquí, como limpiar el formulario o actualizar la vista de resultados
+                    } else {
+                        alert('Hubo un error al modificar el producto.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error al modificar el producto:', error);
+                    alert('Hubo un error al modificar el producto.');
+                });
+        }
+
+        // Añadir el event listener al botón de modificación
+        document.getElementById('Mod-product-button').addEventListener('click', modifyProduct);
+
+
+
+
     </script>
 
     <footer class="text-center py-4">

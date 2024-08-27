@@ -78,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $response = [
             'success' => false,
-            'message' => 'Error al anular el producto: ' . $stmt->error
+            'message' => '' . $stmt->error
         ];
     }
 

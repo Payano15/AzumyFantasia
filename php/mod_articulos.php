@@ -25,82 +25,78 @@ if ($environment === 'production') {
 
 // Crear conexión
 $conn = new mysqli($servername, $username, $password, $dbname);
-
 // Verificar la conexión
 if ($conn->connect_error) {
     header('Content-Type: application/json');
-    echo json_encode(['status' => 'error', 'message' => 'La conexión falló: ' . $conn->connect_error]);
+    echo json_encode(['success' => false, 'message' => 'La conexión falló: ' . $conn->connect_error]);
     exit();
 }
 
 // Verificar si se ha enviado el formulario
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Obtener los datos del formulario
-    $productId = $_POST['product-id'] ?? null;
-    $productDescription = $_POST['product-description'] ?? '';
-    $productPrice = $_POST['product-price'] ?? '';
+    $productId = intval($_POST['product-id']);
+    $productDescription = $_POST['product-description'];
+    $productPrice = floatval($_POST['product-price']);
     $showOnHomepage = isset($_POST['show-on-homepage']) ? 'S' : 'N';
-    $grupo = $_POST['grupo'] ?? 'default'; // Se asume que 'default' es el valor por defecto
-    $type = $_POST['type'] ?? ''; // Asegúrate de que 'type' sea el tipo de operación (MOD o algo más)
+    $inicioOptions = $_POST['inicioOptions'] ?? null;
 
-    // Manejar la imagen
+    // Manejar la imagen (opcional)
     $productImage = null;
     if (isset($_FILES['product-image']) && $_FILES['product-image']['error'] === UPLOAD_ERR_OK) {
-        $uploadDir = 'uploads/';
+        $uploadDir = '../uploads/';
         $uploadFile = $uploadDir . basename($_FILES['product-image']['name']);
         if (move_uploaded_file($_FILES['product-image']['tmp_name'], $uploadFile)) {
             $productImage = basename($_FILES['product-image']['name']);
         } else {
             header('Content-Type: application/json');
-            echo json_encode(['status' => 'error', 'message' => 'Error al subir la imagen']);
+            echo json_encode(['success' => false, 'message' => 'Error al subir la imagen']);
             exit();
         }
     }
 
-    // Asegurarse de que el ID del producto no sea nulo
-    if (empty($productId) || !is_numeric($productId)) {
-        header('Content-Type: application/json');
-        echo json_encode(['status' => 'error', 'message' => 'ID del producto no válido']);
-        exit();
+    // Crear la consulta de actualización
+    $sql = "UPDATE sub_articulo SET 
+                descripcion = ?, 
+                precio = ?, 
+                estatus = 'ACT', 
+                fechacreate = NOW(), 
+                ind_principal = ?, 
+                grupo_principal = ?";
+
+    // Agregar la actualización de la imagen solo si se subió una nueva
+    if ($productImage) {
+        $sql .= ", urlimagen = ?";
     }
 
-    // Preparar la llamada al procedimiento almacenado
-    $sql = "CALL usp_manage_productos(?, ?, ?, ?, ?, ?, ?, @o_message)";
+    $sql .= " WHERE id = ?";
+
+    // Preparar la declaración
     $stmt = $conn->prepare($sql);
     if (!$stmt) {
         header('Content-Type: application/json');
-        echo json_encode(['status' => 'error', 'message' => 'Error en la preparación de la declaración del procedimiento almacenado: ' . $conn->error]);
+        echo json_encode(['success' => false, 'message' => 'Error en la preparación de la declaración UPDATE: ' . $conn->error]);
         exit();
     }
 
-    // Bind los parámetros
-    $stmt->bind_param(
-        'isssssi',
-        $productId,             // ID del producto
-        $productDescription,    // Descripción del producto
-        $productPrice,          // Precio del producto
-        $productImage,          // Imagen del producto (URL de la imagen)
-        $showOnHomepage,        // Mostrar en la página principal (S o N)
-        $grupo,                 // Grupo
-        $type                   // Tipo de operación (MOD o algo más)
-    );
+    // Vincular los parámetros
+    if ($productImage) {
+        $stmt->bind_param('sdssss', $productDescription, $productPrice, $showOnHomepage, $inicioOptions, $productImage, $productId);
+    } else {
+        $stmt->bind_param('sdsss', $productDescription, $productPrice, $showOnHomepage, $inicioOptions, $productId);
+    }
 
-    // Ejecutar el procedimiento
+    // Ejecutar la consulta
     if ($stmt->execute()) {
-        // Obtener el mensaje del procedimiento almacenado
-        $result = $conn->query("SELECT @o_message AS message");
-        $row = $result->fetch_assoc();
-        $message = $row['message'];
-
         $response = [
-            'status' => 'success',
-            'message' => $message,
-            'productId' => $productId, // ID del producto insertado o modificado
+            'success' => true,
+            'message' => 'Producto actualizado exitosamente',
+            'affectedRows' => $stmt->affected_rows // Filas afectadas por la actualización
         ];
     } else {
         $response = [
-            'status' => 'error',
-            'message' => 'Error al guardar el producto: ' . $stmt->error
+            'success' => false,
+            'message' => 'Error al actualizar el producto: ' . $stmt->error
         ];
     }
 
@@ -112,4 +108,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 // Cerrar la conexión
 $conn->close();
-?>
