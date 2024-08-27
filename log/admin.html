@@ -95,11 +95,15 @@
                             </select>
                         </div>
                     </ul>
-                    <button id="add-product-button" type="button">Guardar Producto</button>
-                    <!-- Cambié type a "button" -->
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <button id="add-product-button" type="button">Guardar Producto</button>
+                        <!-- Añadir el label para mostrar el ID -->
+                        <label id="product-id-label" style="font-weight: bold; display: none;">-</label>
+                    </div>
                 </form>
             </div>
         </div>
+
 
         <div id="group-box">
             <h3 style="font-size: 18px; margin-bottom: 10px;">Opción de Búsqueda</h3>
@@ -241,54 +245,6 @@
                 });
         }
 
-        // function displayResults(results) {
-        //     console.log(results); // Verifica los datos recibidos
-        //     const resultsContainer = document.getElementById('results-container');
-        //     resultsContainer.innerHTML = '';
-
-        //     results.forEach(result => {
-        //         console.log(result); // Verifica cada objeto result
-
-        //         // Usa el campo urlimagen si está disponible, de lo contrario, usa una imagen predeterminada
-        //         const imageUrl = result.urlimagen ? `../uploads/${result.urlimagen}` : '../uploads/default-image.png';
-
-        //         const resultDiv = document.createElement('div');
-        //         resultDiv.classList.add('result-item');
-
-        //         resultDiv.innerHTML = `
-        //     <div style="display: flex; align-items: center;">
-        //         <img src="${imageUrl}" alt="${result.desc_articulo || 'Imagen'}" style="max-width: 100px; margin-right: 10px;">
-        //         <div>
-        //             <h4>${result.articulo}</h4>
-        //             <p>Descripción: ${result.desc_articulo}</p>
-        //             <p>Precio: ${result.precio}</p>
-        //             <button class="edit-button" data-id="${result.id}" data-id-subartic="${result.idsubartic}">
-        //                 <img src="../img/iconos/editar.png" alt="Editar" style="width: 20px; height: 20px;">
-        //             </button>
-        //         </div>
-        //     </div>
-        // `;
-        //         resultsContainer.appendChild(resultDiv);
-        //     });
-
-        //     // Agrega un manejador de eventos para los botones de edición
-        //     document.querySelectorAll('.edit-button').forEach(button => {
-        //         button.addEventListener('click', function () {
-        //             const id = this.getAttribute('data-id');
-        //             const idSubartic = this.getAttribute('data-id-subartic');
-        //             loadProductData(id, idSubartic);
-
-        //             // Guardar el tipo como 'MOD'
-        //             tipo = 'MOD';
-        //             console.log('Tipo:', tipo); // Verifica el valor en la consola
-
-        //             // Desplazarse hacia el inicio de la página
-        //             window.scrollTo({ top: 0, behavior: 'smooth' });
-        //         });
-        //     });
-        // }
-
-
         // Función para mostrar la vista previa de la imagen cuando se hace clic en el botón de edición
         function showEditImage(imageUrl) {
             const previewContainer = document.getElementById('image-preview-container');
@@ -317,17 +273,17 @@
                 resultDiv.classList.add('result-item');
 
                 resultDiv.innerHTML = `
-            <div style="display: flex; align-items: center;">
-                <img src="${imageUrl}" alt="${result.desc_articulo || 'Imagen'}" style="max-width: 100px; margin-right: 10px;">
-                <div>
-                    <h4>${result.articulo}</h4>
-                    <p>Descripción: ${result.desc_articulo}</p>
-                    <p>Precio: ${result.precio}</p>
-                    <button class="edit-button" data-id="${result.id}" data-id-subartic="${result.idsubartic}" data-image-url="${imageUrl}">
-                        <img src="../img/iconos/editar.png" alt="Editar" style="width: 20px; height: 20px;">
-                    </button>
-                </div>
+        <div style="display: flex; align-items: center;">
+            <img src="${imageUrl}" alt="${result.desc_articulo || 'Imagen'}" style="max-width: 100px; margin-right: 10px;">
+            <div>
+                <h4>${result.articulo}</h4>
+                <p>Descripción: ${result.desc_articulo}</p>
+                <p>Precio: ${result.precio}</p>
+                <button class="edit-button" data-id="${result.id}" data-id-subartic="${result.idsubartic}" data-image-url="${imageUrl}">
+                    <img src="../img/iconos/editar.png" alt="Editar" style="width: 20px; height: 20px;">
+                </button>
             </div>
+        </div>
         `;
                 resultsContainer.appendChild(resultDiv);
             });
@@ -345,6 +301,13 @@
                     tipo = 'MOD';
                     console.log('Tipo:', tipo); // Verifica el valor en la consola
 
+                    // Mostrar el label con el ID del producto
+                    const productIdLabel = document.getElementById('product-id-label');
+                    if (productIdLabel) {
+                        productIdLabel.textContent = `${id}`;
+                        productIdLabel.style.display = 'inline'; // Muestra el label
+                    }
+
                     // Desplazarse hacia el inicio de la página
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 });
@@ -352,16 +315,47 @@
         }
 
 
+        // Función para manejar la edición de un producto
+        function handleEditClick(id) {
+            const productIdLabel = document.getElementById('product-id-label');
+            if (productIdLabel) {
+                productIdLabel.textContent = `ID del Producto: ${id}`;
+                productIdLabel.style.display = 'inline'; // Muestra el label
+            }
 
-        // Función para enviar el formulario y buscar el producto
+            // Puedes también actualizar un campo oculto con el id
+            const productIdInput = document.getElementById('product-id');
+            if (productIdInput) {
+                productIdInput.value = id;
+            }
+        }
+
         async function handleAddProduct() {
             const productForm = document.getElementById('product-form'); // Asegúrate de que el ID del formulario coincida
+
+            // Obtén el ID del producto del label
+            const productId = document.getElementById('product-id-label').textContent;
 
             // Recoge los datos del formulario
             const formData = new FormData(productForm);
 
+            // Añade el ID del producto al FormData
+            formData.append('product-id', productId);
+
             // Añade el tipo MOD al FormData
             formData.append('type', 'MOD');
+
+            // Añade el campo ind_principal (es decir, si el producto debe mostrarse en la página principal)
+            formData.append('ind_principal', document.getElementById('show-on-homepage').checked ? '1' : '0');
+
+            // Añade un valor por defecto para p_grupo si es necesario (puedes cambiar esto según tus requisitos)
+            formData.append('grupo', 'default'); // Cambia 'default' según lo necesario
+
+            // Imprimir los datos de FormData en la consola
+            console.log('Datos enviados al procedimiento:');
+            formData.forEach((value, key) => {
+                console.log(`${key}: ${value}`);
+            });
 
             try {
                 const response = await fetch('../php/mod_articulos.php', { // Cambia la ruta al script PHP correcto
@@ -369,7 +363,15 @@
                     body: formData
                 });
 
+                // Verifica el código de estado de la respuesta
+                if (!response.ok) {
+                    throw new Error('Error en la solicitud: ' + response.statusText);
+                }
+
                 const result = await response.json();
+
+                // Imprime la respuesta del servidor en la consola
+                console.log('Respuesta del servidor:', result);
 
                 // Maneja la respuesta
                 if (result.status === 'success') {
@@ -384,6 +386,44 @@
                 console.error('Error al enviar los datos:', error);
             }
         }
+
+        // // Función para enviar el formulario y buscar el producto
+        // async function handleAddProduct() {
+        //     const productForm = document.getElementById('product-form'); // Asegúrate de que el ID del formulario coincida
+
+        //     // Recoge los datos del formulario
+        //     const formData = new FormData(productForm);
+
+        //     // Añade el tipo MOD al FormData
+        //     formData.append('type', 'MOD');
+
+        //     // Imprimir los datos de FormData en la consola
+        //     console.log('Datos enviados al procedimiento:');
+        //     formData.forEach((value, key) => {
+        //         console.log(`${key}: ${value}`);
+        //     });
+
+        //     try {
+        //         const response = await fetch('../php/mod_articulos.php', { // Cambia la ruta al script PHP correcto
+        //             method: 'POST',
+        //             body: formData
+        //         });
+
+        //         const result = await response.json();
+
+        //         // Maneja la respuesta
+        //         if (result.status === 'success') {
+        //             alert(`Producto guardado exitosamente: ${result.message}`);
+
+        //             // Llama a displayResults para mostrar la información actualizada
+        //             displayResults(result.data);
+        //         } else {
+        //             alert(`Error al guardar el producto: ${result.message}`);
+        //         }
+        //     } catch (error) {
+        //         console.error('Error al enviar los datos:', error);
+        //     }
+        // }
 
         // Espera a que el DOM esté completamente cargado
         document.addEventListener('DOMContentLoaded', () => {
