@@ -7,27 +7,7 @@
     <link rel="icon" href="../img/logos/logo 1.jpeg" type="image/x-icon">
     <title>Editar Productos</title>
     <link rel="stylesheet" href="../log/admin.css">
-    <style>
-        /* Estilo para el contenedor de resultados de autocompletado */
-        #autocomplete-results {
-            position: absolute;
-            border: 1px solid #ced4da;
-            background-color: #ffffff;
-            z-index: 1000;
-            max-height: 150px;
-            overflow-y: auto;
-            width: 100%;
-        }
-
-        #autocomplete-results div {
-            padding: 8px;
-            cursor: pointer;
-        }
-
-        #autocomplete-results div:hover {
-            background-color: #f1f1f1;
-        }
-    </style>
+   
 </head>
 
 <body>
@@ -50,14 +30,14 @@
                     <ul class="form-list">
                         <li style="position: relative;">
                             <label for="product-name">Nombre del Producto:</label>
-                            <input type="text" id="product-name" name="product-name" placeholder="Nombre del producto"
-                                required>
-                            <!-- Contenedor para los resultados de autocompletado -->
+                            <input type="text" id="product-name" name="product-name" placeholder="Nombre del producto" required>
+                            <!-- Contenedor para los resultados de autocompletado, ahora debajo del campo de texto -->
                             <div id="autocomplete-results"></div>
                             <!-- Campos ocultos para almacenar idarticulo y codarticulo -->
                             <input type="hidden" id="product-id" name="product-id">
                             <input type="hidden" id="product-code" name="product-code">
                         </li>
+                        
                         <li>
                             <label for="product-description">Descripción:</label>
                             <textarea id="product-description" name="product-description" rows="4"
@@ -163,44 +143,47 @@
         }
 
         document.getElementById('product-name').addEventListener('input', debounce(function () {
-            const query = this.value;
-            const resultsContainer = document.getElementById('autocomplete-results');
-            const inputRect = this.getBoundingClientRect();
+    const query = this.value;
+    const resultsContainer = document.getElementById('autocomplete-results');
+    const inputRect = this.getBoundingClientRect();
+    const containerRect = this.parentNode.getBoundingClientRect(); // Obtener el contenedor `li`
 
-            if (query.length > 2) {
-                fetch(`../php/search.php?q=${encodeURIComponent(query)}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        resultsContainer.innerHTML = '';
-                        if (data.length > 0) {
-                            data.forEach(product => {
-                                const resultItem = document.createElement('div');
-                                resultItem.textContent = `${product.articulo} (Código: ${product.codarticulo})`;
-                                resultItem.addEventListener('click', function () {
-                                    document.getElementById('product-name').value = product.articulo;
-                                    document.getElementById('product-id').value = product.idarticulo;
-                                    document.getElementById('product-code').value = product.codarticulo;
-                                    resultsContainer.style.display = 'none';
-                                });
-                                resultsContainer.appendChild(resultItem);
-                            });
-
-                            resultsContainer.style.display = 'block';
-                            resultsContainer.style.top = `${inputRect.bottom + window.scrollY}px`;
-                            resultsContainer.style.left = `${inputRect.left + window.scrollX}px`;
-                            resultsContainer.style.width = `${inputRect.width}px`;
-                        } else {
+    if (query.length > 2) {
+        fetch(`../php/search.php?q=${encodeURIComponent(query)}`)
+            .then(response => response.json())
+            .then(data => {
+                resultsContainer.innerHTML = '';
+                if (data.length > 0) {
+                    data.forEach(product => {
+                        const resultItem = document.createElement('div');
+                        resultItem.textContent = `${product.articulo} (Código: ${product.codarticulo})`;
+                        resultItem.addEventListener('click', function () {
+                            document.getElementById('product-name').value = product.articulo;
+                            document.getElementById('product-id').value = product.idarticulo;
+                            document.getElementById('product-code').value = product.codarticulo;
                             resultsContainer.style.display = 'none';
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        alert('Error al buscar el producto. Verifica la Consola del Navegador para más detalles.');
+                        });
+                        resultsContainer.appendChild(resultItem);
                     });
-            } else {
-                resultsContainer.style.display = 'none';
-            }
-        }, 300));
+
+                    resultsContainer.style.display = 'block';
+                    // Ajustar la posición del contenedor para que esté justo debajo del campo de texto con un pequeño margen
+                    resultsContainer.style.top = `${inputRect.height + 30}px`; // Ajusta el margen según sea necesario
+                    resultsContainer.style.left = '0'; // Alineado con el campo de texto
+                    resultsContainer.style.width = `${inputRect.width}px`; // Ancho igual al campo de texto
+                } else {
+                    resultsContainer.style.display = 'none';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error al buscar el producto. Verifica la Consola del Navegador para más detalles.');
+            });
+    } else {
+        resultsContainer.style.display = 'none';
+    }
+}, 300));
+
 
         document.getElementById('product-form').addEventListener('submit', function (event) {
             event.preventDefault();
