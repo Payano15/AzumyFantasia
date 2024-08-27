@@ -16,13 +16,13 @@ body {
 
 /* Contenedor principal ajustado para trabajar con flexbox */
 .container {
-    flex: auto; /* Permite que el contenedor principal expanda para llenar el espacio disponible */
-    padding: 30px; /* Ajustar para crear espacio adicional dentro del contenedor */
-    width: 40%; /* Máxima anchura del contenedor */
-    margin: 0 auto; /* Centrar el contenedor */
-    text-align: left;
-    position:relative;
-}
+        flex: auto; /* Permite que el contenedor principal expanda para llenar el espacio disponible */
+        padding: 30px; /* Ajustar para crear espacio adicional dentro del contenedor */
+        width: 40%; /* Máxima anchura del contenedor */
+        margin: 0 auto; /* Centrar el contenedor */
+        text-align: left;
+        position:relative;
+    }
 
 /* Estilos para el header */
 header {
@@ -63,6 +63,33 @@ main {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
 }
 
+#autocomplete-results {
+    display: none; /* Oculto por defecto */
+    position: absolute; /* Posición absoluta respecto al contenedor relativo */
+    top: 100%; /* Justo debajo del campo de texto */
+    left: 0;
+    width: 100%; /* Ancho completo del campo de texto */
+    max-height: 150px; /* Altura máxima del contenedor */
+    overflow-y: auto; /* Barra de desplazamiento vertical si el contenido es demasiado largo */
+    background-color: #ffffff; /* Fondo blanco para el contenedor */
+    border: 1px solid #ddd; /* Borde del contenedor */
+    border-radius: 4px; /* Bordes redondeados del contenedor */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    z-index: 1000; /* Asegura que el contenedor se muestre por encima de otros elementos */
+}
+
+/* Estilos para los elementos dentro del contenedor de autocompletado */
+#autocomplete-results div {
+    padding: 8px;
+    cursor: pointer;
+}
+
+#autocomplete-results div:hover {
+    background-color: #f0f0f0; /* Cambia el fondo al pasar el ratón */
+}
+
+
+
 /* Estilos para los formularios */
 .product-form {
     margin: 0;
@@ -83,6 +110,7 @@ main {
     font-weight: bold;
 }
 
+/* Estilos para los campos de entrada y textarea */
 .product-form input[type="text"],
 .product-form input[type="file"],
 .product-form input[type="number"],
@@ -92,6 +120,7 @@ main {
     margin-top: 5px;
     border: 1px solid #ddd;
     border-radius: 4px; /* Bordes redondeados en los campos de entrada */
+    box-sizing: border-box; /* Asegura que el padding y el borde se incluyan en el ancho total */
 }
 
 .product-form textarea {
@@ -124,6 +153,8 @@ main {
     display: flex;
     align-items: center;
 }
+
+
 
 /* Estilos para el GroupBox (contenedor que aparece al marcar el checkbox) */
 .groupbox {
@@ -313,14 +344,6 @@ nav a:hover {
 .edit-button img {
     width: 20px;
     height: 20px;
-}
-
-
-/* Estilo básico para el contenedor */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
 }
 
 /* Estilo para la sección de administración */
