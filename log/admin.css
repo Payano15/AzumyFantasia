@@ -334,16 +334,45 @@ nav a:hover {
     margin: 5px 0;
 }
 
-.edit-button {
-    margin-left: auto;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
+.edit-button,
+.cancel-button {
+    background-color: transparent; /* Fondo transparente */
+    border: none; /* Sin borde */
+    cursor:pointer;
+    padding-left: 8px;
+    padding: 8px; /* Ajusta el relleno según sea necesario */
+    display: flex;
+    justify-content: center; /* Centra la imagen horizontalmente */
+    align-items: center; /* Centra la imagen verticalmente */
+    color: transparent; /* Hace el texto (si lo hubiera) transparente */
+    outline: none;
 }
 
-.edit-button img {
-    width: 20px;
-    height: 20px;
+.edit-button:hover,
+.cancel-button:hover {
+    background-color: transparent; /* Fondo transparente en hover */
+    color: transparent; /* Texto (si lo hubiera) transparente en hover */
+    border: none;
+
+}
+
+.edit-button:focus,
+.cancel-button:focus {
+    outline: none;
+}
+
+.edit-button img,
+.cancel-button img {
+    width: 24px;  /* Tamaño de la imagen */
+    height: 24px;
+    object-fit: cover;
+}
+
+.result-buttons {
+    display: flex;
+    gap: 15px;  /* Aumenta el espacio entre los botones */
+    margin-left: auto;
+
 }
 
 /* Estilo para la sección de administración */

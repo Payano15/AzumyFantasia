@@ -167,9 +167,10 @@
                             });
 
                             resultsContainer.style.display = 'block';
-                            resultsContainer.style.top = `${inputRect.bottom + window.scrollY}px`;
-                            resultsContainer.style.left = `${inputRect.left + window.scrollX}px`;
-                            resultsContainer.style.width = `${inputRect.width}px`;
+                    // Ajustar la posición del contenedor para que esté justo debajo del campo de texto con un pequeño margen
+                    resultsContainer.style.top = `${inputRect.height + 30}px`; // Ajusta el margen según sea necesario
+                    resultsContainer.style.left = '0'; // Alineado con el campo de texto
+                    resultsContainer.style.width = `${inputRect.width}px`; // Ancho igual al campo de texto
                         } else {
                             resultsContainer.style.display = 'none';
                         }
@@ -269,25 +270,26 @@
                 </button>`
                     : '';
 
-                resultDiv.innerHTML = `
-            <div style="display: flex; align-items: center;">
-                <img src="${imageUrl}" alt="${result.desc_articulo || 'Imagen'}" style="max-width: 100px; margin-right: 10px;">
-                <div>
-                    <h4>${result.articulo}</h4>
-                    <p>Descripción: ${result.desc_articulo}</p>
-                    <p>Precio: ${result.precio}</p>
-                    <div style="display: flex; gap: 10px;">
-                        <button class="edit-button" data-id="${result.id}" data-id-subartic="${result.idsubartic}" data-image-url="${imageUrl}">
-                            <img src="../img/iconos/editar.png" alt="Editar" style="width: 20px; height: 20px;">
-                        </button>
-                        <button class="cancel-button" data-id="${result.id}" data-id-subartic="${result.idsubartic}">
-                            <img src="../img/iconos/anular.png" alt="Anular" style="width: 20px; height: 20px;">
-                        </button>
-                        ${activateButtonHtml}
+                    resultDiv.innerHTML = `
+                <div style="display: flex; align-items: center;">
+                    <img src="${imageUrl}" alt="${result.desc_articulo || 'Imagen'}" style="max-width: 100px; margin-right: 10px;">
+                    <div>
+                        <h4>${result.articulo}</h4>
+                        <p>Descripción: ${result.desc_articulo}</p>
+                        <p>Precio: ${result.precio}</p>
+                        <div class="result-buttons">
+                            <button class="edit-button" data-id="${result.id}" data-id-subartic="${result.idsubartic}" data-image-url="${imageUrl}">
+                                <img src="../img/iconos/editar.png" alt="Editar">
+                            </button>
+                            <button class="cancel-button" data-id="${result.id}" data-id-subartic="${result.idsubartic}">
+                                <img src="../img/iconos/anular.png" alt="Anular"> 
+                            </button> 
+                            ${activateButtonHtml}
+                        </div>
                     </div>
                 </div>
-            </div>
-        `;
+            `;
+
                 resultsContainer.appendChild(resultDiv);
             });
 
