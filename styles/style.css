@@ -14,11 +14,8 @@ body {
 /* Estilos para el header */
 header {
     background-color: rgba(255, 255, 255, 0.8); /* Fondo semi-transparente para que el texto sea legible */
-    padding: 10px 15px;
+    padding: 5px;
     text-align: center;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
 }
 
 /* Estilos para los enlaces del nav en el header */
@@ -26,13 +23,12 @@ header nav a {
     color: #000;
     text-decoration: none;
     font-weight: bold;
-    margin: 0 15px;
+    margin: 0 10px;
     transition: color 0.3s ease;
 }
 
 /* Estilo para los enlaces al pasar el ratón */
 header nav a:hover {
-    color: #007bff; /* Cambia el color del texto al pasar el ratón */
     text-decoration: underline;
 }
 
@@ -44,21 +40,25 @@ header nav a:hover {
 /* Estilos para las tarjetas de productos */
 .card {
     border: none;
-    border-radius: 8px; /* Bordes redondeados */
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease;
 }
 
 /* Efecto de escala al pasar el ratón sobre la tarjeta */
 .card:hover {
     transform: scale(1.05);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos para el footer */
+footer {
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo semi-transparente */
+    padding: 20px;
+    text-align: center;
 }
 
 /* Estilo para las imágenes dentro de las tarjetas */
 .card-img-top {
     width: 100%; /* Asegura que la imagen ocupe todo el ancho del contenedor de la tarjeta */
-    height: 180px; /* Altura fija para imágenes */
+    height: auto; /* Mantiene la relación de aspecto original de la imagen */
     object-fit: cover; /* Asegura que la imagen cubra el contenedor sin distorsionarse */
 }
 
@@ -86,118 +86,133 @@ header nav a:hover {
 
 /* Estilo para el logo */
 .logo img {
-    height: 80px; /* Ajusta la altura del logo */
+    height: 90px; /* Ajusta la altura del logo */
     display: flex;
-    margin-bottom: 0;
+    margin-bottom: 0%;
 }
 
 /* Navegación */
 nav {
     display: flex;
-    justify-content: center; /* Centra la navegación */
-    margin-top: 10px;
+    justify-content: flex-end;
+    margin-top: 1px;
 }
 
 nav a {
-    margin: 0 15px;
+    margin-left: 15px;
     text-decoration: none;
     color: #000;
-    transition: color 0.3s ease;
 }
 
 nav a:hover {
-    color: #007bff; /* Cambia el color del texto al pasar el ratón */
     text-decoration: underline;
 }
 
-/* PRODUCTOS */
-.catalogo {
+
+.contenedor-producto {
+ width: 100%; /* Usa todo el ancho disponible */
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    gap: 15px;
-    padding: 15px;
+    flex-wrap: wrap; /* Permite que los productos se envuelvan a la siguiente línea si es necesario */
+    justify-content: space-between; /* Distribuye el espacio restante entre los productos */
 }
 
+/* Estilos para productos */
 .producto {
     background-color: #fff;
-    border: 1px solid #ddd;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: calc(25% - 20px); /* Ajusta el ancho para que quepan cuatro productos por fila */
+    overflow: hidden;
+    max-width: 380px;
+    text-align: center;
+    padding: 20px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    margin: 12px;
+    flex: 1 1 calc(25% - 8px); /* Ajuste para el nuevo gap */
     box-sizing: border-box;
-    transition: transform 0.2s, box-shadow 0.2s;
+    margin-bottom: 12px;
+    box-sizing: border-box; /* Asegura que padding y border estén dentro del ancho especificado */
+    display: inline-block; /* Asegura que los productos se alineen uno al lado del otro */
+    vertical-align: top; /* Alinea los productos al tope vertical */
+    
 }
 
 .producto:hover {
-    transform: translateY(-5px);
+    transform: translateY(-10px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .producto img {
     width: 100%;
-    height: 150px; /* Altura fija para las imágenes de los productos */
-    object-fit: cover;
-    border-bottom: 1px solid #ddd;
+    height: 60%;
+    border-bottom: 2px solid #eee;
 }
 
 .producto h2 {
-    font-size: 1.25em; /* Tamaño de fuente más pequeño para títulos */
+    font-size: 1.5em;
     margin: 10px 0;
-    padding: 0 15px;
+    color: #333;
 }
 
 .descripcion {
-    font-size: 0.85em;
-    color: #666;
-    padding: 0 15px;
-}
-
-.precio {
-    font-size: 1.1em;
-    color: #007bff;
-    padding: 0 15px 15px;
-}
-
-button {
-    background-color: #007bff;
-    border: none;
-    color: #fff;
-    padding: 10px;
-    width: calc(100% - 30px);
-    margin: 0 15px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-/* Footer */
-footer {
-    background-color: #575757;
-    color: #fff;
-    padding: 20px;
-    text-align: center;
-}
-
-.footer-content {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-footer p {
+    color: #777;
+    font-size: 0.9em;
     margin: 10px 0;
 }
 
-footer a {
-    color: #fff;
-    text-decoration: none;
-    margin: 0 10px;
+.precio {
+    font-size: 1.2em;
+    color: #e94e77;
+    margin: 10px 0;
 }
 
-footer a:hover {
-    text-decoration: underline;
+button {
+    background-color: #e94e77;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1em;
+    padding: 10px 20px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #d83f65;
+}
+
+/* Ajustes específicos para productos */
+.producto input[type="number"] {
+    max-width: 60px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+    margin-right: 10px;
+}
+
+.producto .btn-sm {
+    background-color: #e94e77;
+    color: white;
+}
+
+.producto .btn-sm:hover {
+    background-color: #d83f65;
+}
+
+/* Ajustes para el campo de cantidad y el botón de añadir */
+.producto .form-control-sm {
+    display: inline-block;
+    width: auto;
+    max-width: 60px;
+    text-align: center;
+    margin-right: 10px;
+}
+
+.producto .btn-sm {
+    background-color: #e94e77;
+    color: white;
+}
+
+.producto .btn-sm:hover {
+    background-color: #d83f65;
 }

@@ -72,22 +72,20 @@ function renderProductos(productos) {
     const rutaBase = './uploads/'; // Ruta base relativa, puede ser una URL absoluta si es necesario
 
     return productos.map(producto => `
-        <div class="col-lg-3 col-md-4 col-sm-6 mb-4"> <!-- Ajusta el tamaño para diferentes dispositivos -->
-            <div class="card border-0 shadow-sm">
-                <img src="${rutaBase}${producto.urlimagen}" class="card-img-top" alt="${producto.articulo}" style="object-fit: cover; height: 180px; border-bottom: 1px solid #ddd;">
-                <div class="card-body d-flex flex-column">
-                    <h6 class="card-title mb-2">${producto.articulo}</h6>
-                    <p class="card-text mb-3" style="font-size: 0.9rem; color: #555; flex-grow: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${producto.desc_articulo}</p>
-                    <p class="card-text text-success mb-3" style="font-size: 1rem;">$${producto.precio}</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <input type="number" id="quantity-${producto.id}" class="form-control form-control-sm w-50" value="1" min="1">
-                        <button class="btn btn-primary btn-sm ms-2" onclick="handleAddToCart('${producto.id}', '${producto.articulo}', '${producto.precio}')">Añadir</button>
-                    </div>
+        <div class="col-md-3 mb-4">
+            <article class="producto">
+                <img src="${rutaBase}${producto.urlimagen}" alt="${producto.articulo}">
+                <p class="descripcion">${producto.desc_articulo}</p>
+                <p class="precio">$${producto.precio}</p>
+                <div class="d-flex justify-content-center align-items-center">
+                    <input type="number" id="quantity-${producto.id}" class="form-control form-control-sm w-50" value="1" min="1" style="max-width: 60px; margin-right: 10px;">
+                    <button class="btn btn-primary btn-sm" onclick="handleAddToCart('${producto.id}', '${producto.articulo}', '${producto.precio}')">Añadir</button>
                 </div>
-            </div>
+            </article>
         </div>
     `).join('');
 }
+
 
 
 
