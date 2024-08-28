@@ -7,46 +7,36 @@
     <title>Carrito de Compras</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="../cart/styles/styles.css"> <!-- Enlace a tu archivo CSS externo -->
-    <style>
-   
-    </style>
 </head>
 <body>
     <header>
         <a href="../index.html" class="logo">
             <img src="../img/logos/logo_1-removebg-sin fondo.png" alt="Logo" class="img-fluid">
         </a>
-
-        <center><H2>CARRITO DE COMPRAS</H2></center>
-
+        <center><h2>CARRITO DE COMPRAS</h2></center>
         <nav>
             <a href="../index.html">Inicio</a>
             <a href="../PRODUCTO/productos.html">Productos</a>
             <a href="../cart/Cart.html">Cart</a>
-            <span id="header-total-price">0.00</span> <!-- Actualizar este elemento si lo deseas usar para mostrar el total en el header -->
+            <span id="header-total-price">0.00</span>
             <img src="https://img.icons8.com/ios-filled/24/000000/shopping-cart.png" alt="Cart">
         </nav>
     </header>
-
-        <br>
-        <div id="cart-items"></div> <!-- Contenedor para los productos del carrito -->
-            <br>
-       
-        <div class="cart-footer row mt-4">
-            <div class="col-md-6 text-right">Total</div>
-            <div class="col-md-6 text-right" id="total-price">$0.00</div> <!-- Total del carrito -->
+    <br>
+    <div id="cart-items"></div> <!-- Contenedor para los productos del carrito -->
+    <br>
+    <div class="cart-footer row mt-4">
+        <div class="col-md-6 text-right">Total</div>
+        <div class="col-md-6 text-right" id="total-price">$0.00</div> <!-- Total del carrito -->
+    </div>
+    <div class="row mt-4">
+        <div class="col-md-12 text-center">
+            <button class="btn btn-success" id="final_button">FINALIZAR COMPRA</button>
         </div>
-    
-
-
-        <div class="row mt-4">
-            <div class="col-md-12 text-center">
-                <button class="btn btn-success" id="final_button">FINALIZAR COMPRA</button>
-            </div>
-        </div>
-        <br>
-        <br>
-        <br>
+    </div>
+    <br>
+    <br>
+    <br>
     <footer class="text-center py-4">
         <p>&copy; 2024 Your Company Name</p>
         <div class="social-icons">
@@ -64,10 +54,9 @@
             </a>
         </div>
     </footer>
-
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script src="mostrat_productos_fact.js"></script> <!-- Enlace a tu archivo JavaScript externo -->
+    <script src="../js/mostrat_productos_fact.js"></script> <!-- Enlace a tu archivo JavaScript externo -->
 </body>
 </html>
