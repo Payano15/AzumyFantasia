@@ -12,7 +12,7 @@
 
 <body>
     <header>
-        <a href="index.html" class="logo">
+        <a href="../index.html" class="logo">
             <img src="../img/logos/logo_1-removebg-sin fondo.png" alt="Logo" class="img-fluid">
         </a>
         <nav>
@@ -24,7 +24,12 @@
     <main>
         <div class="container">
             <div class="admin-section">
-                <h2>Administrar Productos</h2>
+               
+
+                <center><h2>Administrar Productos</h2></center>
+
+                <br>
+
                 <form id="product-form" class="product-form" action="../conexion.php" method="POST"
                     enctype="multipart/form-data">
                     <ul class="form-list">
@@ -76,12 +81,17 @@
                             </select>
                         </div>
                     </ul>
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                        <button id="add-product-button" type="button">Guardar Producto</button>
-                        <button id="Mod-product-button" type="button" style="display: none;">Modificar Producto</button>
+
+                    <br>
+
+                    <div  style="display: flex; justify-content: flex-end;">
+                        <button id="add-product-button" class="guardao" type="button">Guardar Producto</button>
+                        <button id="Mod-product-button" class="guardao" type="button" style="display: none;">Modificar Producto</button>
                         <!-- Añadir el label para mostrar el ID -->
                         <label id="product-id-label" style="font-weight: bold; display: none;">-</label>
+
                     </div>
+                    <br>
                 </form>
             </div>
         </div>
@@ -105,24 +115,36 @@
                 </div>
             </div>
 
-            <!-- New section for pagination controls -->
-            <div class="row mt-4">
-                <div class="col-md-12">
-                    <!-- Label to show current page range -->
-                    <div id="page-info" class="mb-3" data-page-index="1">
-                        <span id="firstrow-label">Mostrando <span id="firstrow">1</span> a <span id="lastrow">10</span>
-                            de <span id="totalrows">100</span> resultados</span>
-                    </div>
-                    <!-- Button to go to the next page -->
-                    <button id="next-page" class="btn btn-primary">Siguiente Página</button>
-                </div>
+            <br>
+
+            <div id="page-info" class="mb-3" data-page-index="1">
+                <span id="firstrow-label">Mostrando <span id="firstrow">1</span> a <span id="lastrow">10</span>
+                    de <span id="totalrows">100</span> resultados</span>
             </div>
+
+            <br>
 
             <!-- Container to display search results -->
             <div id="results-container">
                 <!-- Results will be dynamically inserted here -->
             </div>
+
+              <!-- New section for pagination controls -->
+              <div class="row mt-4">
+                <div class="col-md-12"  style="display: flex; justify-content: flex-end;">
+                    <!-- Label to show current page range -->
+                    
+                    <!-- Button to go to the next page -->
+                    <button id="next-page" class="btn btn-primary" style="padding: 12px 24px;">Siguiente Página</button>
+                </div>
+            </div>
+
+            <br>
+
         </div>
+
+        
+
     </main>
 
     <script>

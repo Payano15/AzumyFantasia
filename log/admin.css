@@ -47,6 +47,7 @@ header nav a:hover {
     text-decoration: underline;
 }
 
+
 main {
     font-family: 'Arial', sans-serif;
     background-color: #8077773f;
@@ -335,7 +336,8 @@ nav a:hover {
 }
 
 .edit-button,
-.cancel-button {
+.cancel-button, 
+.activar-button {
     background-color: transparent; /* Fondo transparente */
     border: none; /* Sin borde */
     cursor:pointer;
@@ -349,22 +351,25 @@ nav a:hover {
 }
 
 .edit-button:hover,
-.cancel-button:hover {
-    background-color: transparent; /* Fondo transparente en hover */
+.cancel-button:hover,
+.activar-button:hover {
+    background-color:#e94e7749; /* Fondo transparente en hover */
     color: transparent; /* Texto (si lo hubiera) transparente en hover */
     border: none;
 
 }
 
 .edit-button:focus,
-.cancel-button:focus {
+.cancel-button:focus,
+.activar-button:focus {
     outline: none;
 }
 
 .edit-button img,
-.cancel-button img {
-    width: 24px;  /* Tamaño de la imagen */
-    height: 24px;
+.cancel-button img,
+.activar-button img {
+    width: 28px;  /* Tamaño de la imagen */
+    height: 28px;
     object-fit: cover;
 }
 
@@ -410,7 +415,7 @@ select {
 
 /* Estilo para el botón de guardar */
 button {
-    background-color: #007bff;
+    background-color: #e94e7749;
     color: white;
     padding: 10px 20px;
     border: none;
@@ -420,7 +425,7 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #e94e7769;
 }
 
 /* Estilo para el contenedor de vista previa de la imagen */
@@ -433,3 +438,71 @@ button:hover {
     max-width: 200px;
 }
 
+
+button.guardao{
+
+    background-color:#e94e7749; /* Fondo transparente en hover */
+    color: black;
+    font-weight: bold;
+    border: none;
+    outline: none;
+
+}
+
+button.guardao:hover{
+
+    background-color:#e94e7765; /* Fondo transparente en hover */
+    color: black;
+    font-weight: bold;
+    border: none;
+    outline: none;
+
+}
+
+
+button.btn-primary{
+
+    background-color: #e94e7749; /* Fondo personalizado */
+    color: black; /* Color del texto */
+    font-weight: bold; /* Texto en negrita */
+    border: none; /* Sin borde */
+    outline: none; /* Sin contorno */
+    box-shadow: none; /* Sin sombra */
+}
+
+button.btn-primary:hover{
+
+    background-color: #e94e7765; /* Fondo ligeramente diferente en hover */
+    color: black; /* Color del texto */
+    font-weight: bold; /* Texto en negrita */
+    border: none; /* Sin borde */
+    outline: none; /* Sin contorno */
+    box-shadow: none; /* Sin sombra */
+}
+
+button.btn-primary:focus,
+button.btn-primary:active {
+    background-color: #e94e7765 !important; /* Mantiene el fondo original, evita azul */
+    color: black !important; /* Mantiene el color del texto */
+    border: none !important; /* Sin borde */
+    outline: none !important; /* Sin contorno */
+    box-shadow: none !important; /* Sin sombra */
+    transition: none !important; /* Evita transiciones */
+}
+
+button.btn-primary:focus-visible,
+button.btn-primary:active:focus {
+    background-color: #e94e7765 !important; /* Asegura que no cambie a azul */
+    color: black !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+button.btn-primary::-moz-focus-inner {
+    border: 0 !important;
+}
+
+button.btn-primary:focus,
+button.btn-primary:active {
+    border: 0 !important;
+}
