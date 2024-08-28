@@ -18,7 +18,7 @@ function addToCart(product) {
 // Función para actualizar la interfaz del carrito
 function updateCartUI() {
     const totalPriceElem = document.getElementById('total-price');
-    const cartCountElem = document.getElementById('cart-count');
+    const cartItemsElem = document.getElementById('cart-items');
 
     if (!totalPriceElem) {
         console.error("Elemento 'total-price' no encontrado en el DOM.");
@@ -28,33 +28,38 @@ function updateCartUI() {
     let totalPrice = 0;
     let totalQuantity = 0;
 
-    cart.forEach(product => {
-        // Asegúrate de que `product.price` sea un número antes de realizar operaciones
+    // Mostrar los productos en el contenedor del carrito
+    cartItemsElem.innerHTML = cart.map(product => {
         const price = parseFloat(product.price.replace('$', ''));
         if (isNaN(price)) {
             console.error(`Precio inválido para el producto con ID ${product.id}: ${product.price}`);
-            return;
+            return '';
         }
         const subtotal = price * product.quantity;
         totalPrice += subtotal;
-        totalQuantity += product.quantity; // Contar la cantidad total de productos
-    });
+        totalQuantity += product.quantity;
 
-    // Redondear el precio total a dos decimales
+        return `
+            <div class="card mb-3">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <img src="./uploads/${product.urlimagen}" class="card-img" alt="${product.articulo}">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">${product.articulo}</h5>
+                            <p class="card-text">${product.desc_articulo}</p>
+                            <p class="card-text text-success">$${price.toFixed(2)}</p>
+                            <p class="card-text">Cantidad: ${product.quantity}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }).join('');
+
     totalPrice = Math.round(totalPrice * 100) / 100;
-
-    // Formatear el precio total con dos decimales
     totalPriceElem.innerText = `Total: $${totalPrice.toFixed(2)}`;
-
-    // Actualiza y muestra el contador solo si hay productos en el carrito
-    if (cartCountElem) {
-        if (totalQuantity > 0) {
-            cartCountElem.innerText = totalQuantity;
-            cartCountElem.style.display = 'inline'; // Muestra el contador
-        } else {
-            cartCountElem.style.display = 'none'; // Oculta el contador si no hay productos
-        }
-    }
 }
 
 // Función para guardar el carrito en localStorage
