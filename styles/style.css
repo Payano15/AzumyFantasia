@@ -14,8 +14,11 @@ body {
 /* Estilos para el header */
 header {
     background-color: rgba(255, 255, 255, 0.8); /* Fondo semi-transparente para que el texto sea legible */
-    padding: 5px;
+    padding: 10px 15px;
     text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 /* Estilos para los enlaces del nav en el header */
@@ -23,11 +26,13 @@ header nav a {
     color: #000;
     text-decoration: none;
     font-weight: bold;
-    margin: 0 10px;
+    margin: 0 15px;
+    transition: color 0.3s ease;
 }
 
 /* Estilo para los enlaces al pasar el ratón */
-.header nav a:hover {
+header nav a:hover {
+    color: #007bff; /* Cambia el color del texto al pasar el ratón */
     text-decoration: underline;
 }
 
@@ -39,30 +44,25 @@ header nav a {
 /* Estilos para las tarjetas de productos */
 .card {
     border: none;
-    transition: transform 0.3s ease;
+    border-radius: 8px; /* Bordes redondeados */
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* Efecto de escala al pasar el ratón sobre la tarjeta */
 .card:hover {
     transform: scale(1.05);
-}
-
-/* Estilos para el footer */
-footer {
-    background-color: rgba(255, 255, 255, 0.8); /* Fondo semi-transparente */
-    padding: 20px;
-    text-align: center;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 /* Estilo para las imágenes dentro de las tarjetas */
 .card-img-top {
     width: 100%; /* Asegura que la imagen ocupe todo el ancho del contenedor de la tarjeta */
-    height: auto; /* Mantiene la relación de aspecto original de la imagen */
+    height: 180px; /* Altura fija para imágenes */
     object-fit: cover; /* Asegura que la imagen cubra el contenedor sin distorsionarse */
 }
 
-/* Opcional: Ajusta el tamaño del contenedor de la tarjeta */
-
+/* Estilo para el carrito */
 .cart {
     position: relative;
     text-decoration: none;
@@ -84,54 +84,39 @@ footer {
     font-size: 12px;
 }
 
-
+/* Estilo para el logo */
 .logo img {
-  /*  max-width: 100px;*/
-    height: 90px;
-   display: flex;
-   /* Desplaza el ícono hacia abajo */
-   margin-bottom: 0%;
-   
-
+    height: 80px; /* Ajusta la altura del logo */
+    display: flex;
+    margin-bottom: 0;
 }
+
+/* Navegación */
 nav {
     display: flex;
-    justify-content: flex-end;
-    margin-top: 1px;
+    justify-content: center; /* Centra la navegación */
+    margin-top: 10px;
 }
+
 nav a {
-    margin-left: 15px;
+    margin: 0 15px;
     text-decoration: none;
     color: #000;
+    transition: color 0.3s ease;
 }
+
 nav a:hover {
+    color: #007bff; /* Cambia el color del texto al pasar el ratón */
     text-decoration: underline;
 }
 
-
-/*PRODUCTOS*/
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
-    color: #333;
-}
-
-
-
-header h1 {
-    margin: 0;
-    font-size: 2.5em;
-}
-
-main {
-    padding: 20px;
-}
-
+/* PRODUCTOS */
 .catalogo {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    gap: 15px;
+    padding: 15px;
 }
 
 .producto {
@@ -139,8 +124,7 @@ main {
     border: 1px solid #ddd;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 10px;
-    width: calc(33% - 20px);
+    width: calc(25% - 20px); /* Ajusta el ancho para que quepan cuatro productos por fila */
     box-sizing: border-box;
     transition: transform 0.2s, box-shadow 0.2s;
 }
@@ -152,28 +136,30 @@ main {
 
 .producto img {
     width: 100%;
+    height: 150px; /* Altura fija para las imágenes de los productos */
+    object-fit: cover;
     border-bottom: 1px solid #ddd;
 }
 
 .producto h2 {
-    font-size: 1.5em;
-    margin: 15px 0 10px;
+    font-size: 1.25em; /* Tamaño de fuente más pequeño para títulos */
+    margin: 10px 0;
     padding: 0 15px;
 }
 
 .descripcion {
-    font-size: 0.9em;
+    font-size: 0.85em;
     color: #666;
     padding: 0 15px;
 }
 
-.catalogo.precio {
-    font-size: 1.2em;
+.precio {
+    font-size: 1.1em;
     color: #007bff;
     padding: 0 15px 15px;
 }
 
-.catalogo.button {
+button {
     background-color: #007bff;
     border: none;
     color: #fff;
@@ -189,11 +175,9 @@ button:hover {
     background-color: #0056b3;
 }
 
-
-/*footer*/
-
+/* Footer */
 footer {
-    background-color: #57575749;
+    background-color: #575757;
     color: #fff;
     padding: 20px;
     text-align: center;
