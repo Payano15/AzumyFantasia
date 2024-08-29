@@ -108,12 +108,48 @@ nav a:hover {
     text-decoration: underline;
 }
 
-
-.contenedor-producto {
- width: 100%; /* Usa todo el ancho disponible */
+/* Ajustes para el contenedor de productos */
+.container {
     display: flex;
-    flex-wrap: wrap; /* Permite que los productos se envuelvan a la siguiente línea si es necesario */
-    justify-content: space-between; /* Distribuye el espacio restante entre los productos */
+    flex-wrap: wrap;
+    gap: 20px; /* Espacio entre los productos */
+    justify-content: center; /* Centra el contenido horizontalmente */
+}
+
+/* Estilo para cada producto */
+.producto {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    flex: 1 1 calc(25% - 20px); /* Asegura que haya 4 productos por línea, considerando el espacio entre ellos */
+    max-width: calc(25% - 20px); /* Ancho máximo para 4 productos por línea */
+    text-align: center;
+    padding: 20px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-sizing: border-box; /* Incluye el padding y border en el ancho total */
+}
+
+/* Asegura que los productos se ajusten en una línea de 4 productos */
+@media (max-width: 1200px) {
+    .producto {
+        flex: 1 1 calc(33.33% - 20px); /* Ajuste para pantallas más pequeñas, 3 productos por línea */
+        max-width: calc(33.33% - 20px);
+    }
+}
+
+@media (max-width: 900px) {
+    .producto {
+        flex: 1 1 calc(50% - 20px); /* Ajuste para pantallas más pequeñas, 2 productos por línea */
+        max-width: calc(50% - 20px);
+    }
+}
+
+@media (max-width: 600px) {
+    .producto {
+        flex: 1 1 calc(100% - 20px); /* Ajuste para pantallas móviles, 1 producto por línea */
+        max-width: calc(100% - 20px);
+    }
 }
 
 /* Estilos para productos */
@@ -127,13 +163,8 @@ nav a:hover {
     padding: 20px;
     transition: transform 0.3s, box-shadow 0.3s;
     margin: 12px;
-    flex: 1 1 calc(25% - 8px); /* Ajuste para el nuevo gap */
-    box-sizing: border-box;
-    margin-bottom: 12px;
-    box-sizing: border-box; /* Asegura que padding y border estén dentro del ancho especificado */
-    display: inline-block; /* Asegura que los productos se alineen uno al lado del otro */
-    vertical-align: top; /* Alinea los productos al tope vertical */
-    
+    flex: 0 0 23%; /* Ajusta el ancho de cada producto para que quepan 4 en una fila */
+
 }
 
 .producto:hover {
