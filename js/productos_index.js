@@ -71,27 +71,23 @@ function renderProductos(productos) {
     }
     const rutaBase = './uploads/'; // Ruta base relativa, puede ser una URL absoluta si es necesario
 
-    return productos.map(producto => `
-        <div class="col-lg-3 col-md-4 col-sm-6 mb-4"> <!-- Ajusta el tamaño para diferentes dispositivos -->
-            <div class="card border-0 shadow-sm">
-                <img id="image-${producto.id}" src="${rutaBase}${producto.urlimagen}" class="card-img-top custom-card-img" alt="${producto.articulo}">
+return productos.map(producto => `
+    <div class="col-lg-4 col-md-6 col-sm-12 mb-4"> <!-- Ajuste en las clases de las columnas -->
+            <div class="card producto-card">
+                <img id="image-${producto.id}" src="${rutaBase}${producto.urlimagen}" class="card-img-top producto-img" alt="${producto.articulo}">
                 <div class="card-body d-flex flex-column">
-                    <h6 class="card-title mb-2">${producto.articulo}</h6>
-                    <p class="card-text custom-card-text mb-3">${producto.desc_articulo}</p>
-                    <p class="card-text text-success custom-price mb-3">$${producto.precio}</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <input type="number" id="quantity-${producto.id}" class="form-control form-control-sm w-50" value="1" min="1">
-                        <button class="btn btn-primary btn-sm ms-2" onclick="handleAddToCart('${producto.id}', '${producto.articulo}', '${producto.desc_articulo}', '${producto.precio}', '${producto.urlimagen}')">Añadir</button>
+                    <h6 class="card-title producto-title">${producto.articulo}</h6>
+                    <p class="card-text producto-desc">${producto.desc_articulo}</p>
+                    <p class="card-text producto-price">$${producto.precio}</p>
+                    <div class="d-flex justify-content-between align-items-center w-100">
+                        <input type="number" id="quantity-${producto.id}" class="form-control form-control-sm w-50 producto-quantity" value="1" min="1">
+                        <button class="btn btn-pink ms-2" onclick="handleAddToCart('${producto.id}', '${producto.articulo}', '${producto.desc_articulo}', '${producto.precio}', '${producto.urlimagen}')">Añadir</button>
                     </div>
                 </div>
             </div>
         </div>
     `).join('');
-    }    
-
-
-
-
+}  
 
 
 

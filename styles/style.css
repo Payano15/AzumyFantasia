@@ -24,7 +24,6 @@ header nav a {
     text-decoration: none;
     font-weight: bold;
     margin: 0 10px;
-    transition: color 0.3s ease;
 }
 
 /* Estilo para los enlaces al pasar el ratón */
@@ -32,37 +31,162 @@ header nav a:hover {
     text-decoration: underline;
 }
 
-/* Ajustes para el contenedor principal */
-.container {
-    padding: 60px 15px; /* Ajustar para crear espacio entre los elementos */
+/* Ajustes para el nav */
+nav {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1px;
 }
 
-/* Estilos para las tarjetas de productos */
-.card {
-    border: none;
-    transition: transform 0.3s ease;
+nav a {
+    margin-left: 15px;
+    text-decoration: none;
+    color: #000;
 }
 
-/* Efecto de escala al pasar el ratón sobre la tarjeta */
-.card:hover {
-    transform: scale(1.05);
+nav a:hover {
+    text-decoration: underline;
 }
 
-/* Estilos para el footer */
-footer {
-    background-color: rgba(255, 255, 255, 0.8); /* Fondo semi-transparente */
-    padding: 20px;
+/* Estilo para el logo */
+.logo img {
+    height: 90px;
+    display: flex;
+    margin-bottom: 0%;
+}
+
+.contenedor-productos1 {
+    display: flex;
+    flex-wrap: wrap; /* Permite que las tarjetas se envuelvan en múltiples líneas */
+    gap: 20px; /* Espacio entre tarjetas */
+    justify-content: center; /* Centra las tarjetas horizontalmente en el contenedor */
+    padding: 20px; /* Espacio interno del contenedor */
+}
+
+.contenedor-productos {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.col-md-4{
+display: grid;
+grid-template-columns: 50% 50%;
+}
+
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+    
+}
+
+/* Estilos generales para la tarjeta de producto */
+.producto-card1{
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* Asegura que el contenido no desborde */
+    width: 380px; /* Ancho fijo */
+    min-height: 500px; /* Altura mínima para mantener las tarjetas uniformes */
+    max-height: 600px; /* Altura máxima opcional para evitar excesiva expansión */
     text-align: center;
+    padding: 20px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: grid; /* Usar flexbox para alinear contenido */
+    flex-direction: column; /* Alinear contenido en columna */
 }
 
-/* Estilo para las imágenes dentro de las tarjetas */
-.card-img-top {
-    width: 100%; /* Asegura que la imagen ocupe todo el ancho del contenedor de la tarjeta */
-    height: auto; /* Mantiene la relación de aspecto original de la imagen */
-    object-fit: cover; /* Asegura que la imagen cubra el contenedor sin distorsionarse */
+.producto-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width:100%; /* Asegúrate de que la tarjeta ocupe todo el ancho de su columna */
+    min-height: 500px;
+    max-height: 600px;
+    text-align: center;
+    padding: 20px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
 }
 
-/* Estilo para el carrito */
+
+.producto-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilo para la imagen del producto */
+.producto-img {
+    width: 100%;
+    height: 200px; /* Altura fija para las imágenes */
+    object-fit: cover; /* Ajusta la imagen para cubrir el área sin distorsionar */
+    border-bottom: 2px solid #eee; /* Línea inferior de separación */
+}
+
+/* Estilo para el título del producto */
+.producto-title {
+    font-size: 1.5em;
+    margin: 10px 0;
+    color: #333;
+}
+
+/* Estilo para la descripción del producto */
+.producto-desc {
+    color: #777;
+    font-size: 0.9em;
+    margin: 10px 0;
+}
+
+.card-body {
+    flex: 1; /* Hace que el cuerpo de la tarjeta ocupe el espacio restante */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Distribuye el espacio entre los elementos */
+}
+
+/* Estilo para el precio del producto */
+.producto-price {
+    font-size: 1.2em;
+    color: #e94e77;
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+/* Estilo para el campo de cantidad */
+.producto-quantity {
+    width: 50%;
+}
+
+/* Estilo para el botón de añadir */
+.btn-pink {
+    background-color: #e94e77;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1em;
+    padding: 10px 20px;
+    transition: background-color 0.3s;
+}
+
+.btn-pink:hover {
+    background-color: #d83f65;
+}
+
+
+
+/* Estilos generales para el main */
+main {
+    font-family: 'Arial', sans-serif;
+    background-color: #8077773f;
+    padding: 20px;
+}
+
+/* Estilos para el cart */
 .cart {
     position: relative;
     text-decoration: none;
@@ -84,118 +208,7 @@ footer {
     font-size: 12px;
 }
 
-/* Estilo para el logo */
-.logo img {
-    height: 90px; /* Ajusta la altura del logo */
-    display: flex;
-    margin-bottom: 0%;
-}
-
-/* Navegación */
-nav {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 1px;
-}
-
-nav a {
-    margin-left: 15px;
-    text-decoration: none;
-    color: #000;
-}
-
-nav a:hover {
-    text-decoration: underline;
-}
-
-/* Ajustes para el contenedor de productos */
-.container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px; /* Espacio entre los productos */
-    justify-content: center; /* Centra el contenido horizontalmente */
-}
-
-/* Estilo para cada producto */
-.producto {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    flex: 1 1 calc(25% - 20px); /* Asegura que haya 4 productos por línea, considerando el espacio entre ellos */
-    max-width: calc(25% - 20px); /* Ancho máximo para 4 productos por línea */
-    text-align: center;
-    padding: 20px;
-    transition: transform 0.3s, box-shadow 0.3s;
-    box-sizing: border-box; /* Incluye el padding y border en el ancho total */
-}
-
-/* Asegura que los productos se ajusten en una línea de 4 productos */
-@media (max-width: 1200px) {
-    .producto {
-        flex: 1 1 calc(33.33% - 20px); /* Ajuste para pantallas más pequeñas, 3 productos por línea */
-        max-width: calc(33.33% - 20px);
-    }
-}
-
-@media (max-width: 900px) {
-    .producto {
-        flex: 1 1 calc(50% - 20px); /* Ajuste para pantallas más pequeñas, 2 productos por línea */
-        max-width: calc(50% - 20px);
-    }
-}
-
-@media (max-width: 600px) {
-    .producto {
-        flex: 1 1 calc(100% - 20px); /* Ajuste para pantallas móviles, 1 producto por línea */
-        max-width: calc(100% - 20px);
-    }
-}
-
-/* Estilos para productos */
-.producto {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    max-width: 380px;
-    text-align: center;
-    padding: 20px;
-    transition: transform 0.3s, box-shadow 0.3s;
-    margin: 12px;
-    flex: 0 0 23%; /* Ajusta el ancho de cada producto para que quepan 4 en una fila */
-
-}
-
-.producto:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.producto img {
-    width: 100%;
-    height: 60%;
-    border-bottom: 2px solid #eee;
-}
-
-.producto h2 {
-    font-size: 1.5em;
-    margin: 10px 0;
-    color: #333;
-}
-
-.descripcion {
-    color: #777;
-    font-size: 0.9em;
-    margin: 10px 0;
-}
-
-.precio {
-    font-size: 1.2em;
-    color: #e94e77;
-    margin: 10px 0;
-}
-
+/* Estilos para los botones */
 button {
     background-color: #e94e77;
     border: none;
@@ -211,39 +224,28 @@ button:hover {
     background-color: #d83f65;
 }
 
-/* Ajustes específicos para productos */
-.producto input[type="number"] {
-    max-width: 60px;
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+/* Estilos para el footer */
+footer {
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo semi-transparente */
+    padding: 20px;
     text-align: center;
-    margin-right: 10px;
 }
 
-.producto .btn-sm {
-    background-color: #e94e77;
-    color: white;
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-.producto .btn-sm:hover {
-    background-color: #d83f65;
+footer p {
+    margin: 10px 0;
 }
 
-/* Ajustes para el campo de cantidad y el botón de añadir */
-.producto .form-control-sm {
-    display: inline-block;
-    width: auto;
-    max-width: 60px;
-    text-align: center;
-    margin-right: 10px;
+footer a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
 }
 
-.producto .btn-sm {
-    background-color: #e94e77;
-    color: white;
-}
-
-.producto .btn-sm:hover {
-    background-color: #d83f65;
+footer a:hover {
+    text-decoration: underline;
 }
