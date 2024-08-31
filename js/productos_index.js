@@ -8,8 +8,13 @@ function inicializarPagina() {
 
 // Función para inicializar el carrito (borrar contenido del carrito)
 function inicializarCarrito() {
-    localStorage.setItem('carrito', ''); // Reinicia el carrito
+    localStorage.setItem('carrito', JSON.stringify([])); // Inicializa el carrito como un array vacío
     console.log('Carrito reiniciado');
+}
+
+// Función para obtener el carrito desde localStorage
+function getCarrito() {
+    return JSON.parse(localStorage.getItem('carrito')) || [];
 }
 
 // Función para actualizar el total del carrito en la interfaz
@@ -72,13 +77,7 @@ function renderProductos(productos) {
     const rutaBase = './uploads/'; // Ruta base relativa, puede ser una URL absoluta si es necesario
 
     return productos.map(producto => `
-
-        <div class="col-lg-3 col-md-4 col-sm-6 mb-4"> <!-- Ajusta el tamaño para diferentes dispositivos -->
-            <div class="card border-0 shadow-sm">
-                <img id="image-${producto.id}" src="${rutaBase}${producto.urlimagen}" class="card-img-top" alt="${producto.articulo}" style="object-fit: cover; height: 180px; border-bottom: 1px solid #ddd;">
-
-return productos.map(producto => `
-    <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+        <div class="col-lg-4 col-md-6 col-sm-12 mb-4"> <!-- Ajuste en las clases de las columnas -->
             <div class="card producto-card">
                 <img id="image-${producto.id}" src="${rutaBase}${producto.urlimagen}" class="card-img-top producto-img" alt="${producto.articulo}">
                 <div class="card-body d-flex flex-column">
@@ -91,52 +90,52 @@ return productos.map(producto => `
                     </div>
                 </div>
             </div>
-     </div>
+        </div>
     `).join('');
-}
+}  
 
-// Función para manejar el clic en "Añadir al carrito"
-function handleAddToCart(id, name, desc, price, imageUrl) {
-    const quantity = parseInt(document.getElementById(`quantity-${id}`).value, 10);
-    console.log(`Botón clicado: ID=${id}, Nombre=${name}, Precio=${price}, Cantidad=${quantity}`);
-    addToCart(id, name, price, quantity);
-    actualizarTotalCarrito(); // Actualiza el total del carrito después de añadir un producto
-}
+function handleAddToCart(product_id, name, description, price, image_url) {
+    const quantity = document.getElementById(`quantity-${product_id}`).value;
 
-// Función para añadir productos al carrito y guardarlos en localStorage
-function addToCart(id, name, price, quantity) {
-    let carrito = getCarrito();
-    
-    // Verifica si el producto ya está en el carrito
-    const productoExistente = carrito.find(item => item.id === id);
-    
-    if (productoExistente) {
-        // Si el producto ya está en el carrito, actualiza la cantidad
-        productoExistente.quantity += quantity;
-    } else {
-        // Si el producto no está en el carrito, añade uno nuevo
-        carrito.push({ id, name, price, quantity });
-    }
-    
-    localStorage.setItem('carrito', serializeCarrito(carrito));
-    console.log('Producto añadido al carrito:', { id, name, price, quantity });
-}
-
-// Función para obtener el carrito desde localStorage
-function getCarrito() {
-    const carritoString = localStorage.getItem('carrito');
-    return carritoString ? deserializeCarrito(carritoString) : [];
-}
-
-// Función para serializar el carrito para almacenamiento
-function serializeCarrito(carrito) {
-    return carrito.map(item => `${item.id}|${item.name}|${item.price}|${item.quantity}`).join(';');
-}
-
-// Función para deserializar el carrito desde almacenamiento
-function deserializeCarrito(carritoString) {
-    return carritoString.split(';').map(item => {
-        const [id, name, price, quantity] = item.split('|');
-        return { id, name, price, quantity: parseInt(quantity, 10) };
+    fetch('../php/add_cart.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            product_id,
+            name,
+            description,
+            price,
+            quantity,
+            image_url
+        })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log(data.message);
+        // Actualiza el carrito o la interfaz de usuario según sea necesario
+        actualizarTotalCarrito();
+    })
+    .catch(error => {
+        console.error('Error:', error);
     });
+}
+
+function actualizarTotalCarrito() {
+    // Implementar lógica para actualizar el total del carrito basado en la respuesta del servidor
+    // Este método puede consultar el servidor para obtener el total actualizado
+    // Ejemplo:
+    fetch('../php/get_cart_total.php') // Crear este archivo para obtener el total
+        .then(response => response.json())
+        .then(data => {
+            // Actualizar la UI con el total del carrito
+            console.log(data.total);
+        })
+        .catch(error => console.error('Error:', error));
 }
