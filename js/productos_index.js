@@ -77,7 +77,7 @@ function renderProductos(productos) {
     const rutaBase = './uploads/'; // Ruta base relativa, puede ser una URL absoluta si es necesario
 
     return productos.map(producto => `
-        <div class="col-lg-4 col-md-6 col-sm-12 mb-4"> <!-- Ajuste en las clases de las columnas -->
+        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
             <div class="card producto-card">
                 <img id="image-${producto.id}" src="${rutaBase}${producto.urlimagen}" class="card-img-top producto-img" alt="${producto.articulo}">
                 <div class="card-body d-flex flex-column">
@@ -86,17 +86,18 @@ function renderProductos(productos) {
                     <p class="card-text producto-price">$${producto.precio}</p>
                     <div class="d-flex justify-content-between align-items-center w-100">
                         <input type="number" id="quantity-${producto.id}" class="form-control form-control-sm w-50 producto-quantity" value="1" min="1">
-                        <button class="btn btn-pink ms-2" onclick="handleAddToCart('${producto.id}', '${producto.articulo}', '${producto.desc_articulo}', '${producto.precio}', '${producto.urlimagen}')">Añadir</button>
+                        <button class="btn btn-pink ms-2" onclick="handleAddToCart('${producto.id}', '${producto.articulo}', '${producto.desc_articulo}', '${producto.precio}', '${rutaBase}${producto.urlimagen}')">
+                            <img src='./img/iconos/anadir-a-la-cesta.png' class="icon" alt="icono"> Añadir
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     `).join('');
-}  
+} 
 
 function handleAddToCart(product_id, name, description, price, image_url) {
     const quantity = document.getElementById(`quantity-${product_id}`).value;
-
     fetch('../php/add_cart.php', {
         method: 'POST',
         headers: {
