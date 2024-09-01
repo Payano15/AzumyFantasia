@@ -42,26 +42,13 @@ $createTableSQL = "
         quantity INT NOT NULL,
         image_url VARCHAR(255) NOT NULL,
         invoice_number INT NOT NULL,
-        session_id VARCHAR(255) NOT NULL,
+        session_id INT NOT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )
 ";
 
 if ($conn->query($createTableSQL) === FALSE) {
     die("Error al crear la tabla: " . $conn->error);
-}
-
-// Iniciar la sesión
-session_start();
-
-// Generar o recuperar el número de factura basado en la sesión
-$session_id = session_id();
-$invoice_number = isset($_SESSION['invoice_number']) ? $_SESSION['invoice_number'] : null;
-
-if (!$invoice_number) {
-    // Generar un nuevo número de factura
-    $invoice_number = time(); // Usar el tiempo actual como número único
-    $_SESSION['invoice_number'] = $invoice_number;
 }
 
 // Obtener datos del cuerpo de la solicitud (POST)
@@ -76,9 +63,11 @@ $description = $data['description'] ?? null;
 $price = $data['price'] ?? null;
 $quantity = $data['quantity'] ?? null;
 $image_url = $data['image_url'] ?? null;
+$invoice_number = $data['invoice_number'] ?? null; // Verifica si está llegando correctamente
+$session_id = $data['session_id'] ?? null; // Recibir el session_id desde la solicitud POST
 
 // Validar datos
-if (is_null($product_id) || is_null($name) || is_null($description) || is_null($price) || is_null($quantity) || is_null($image_url)) {
+if (is_null($product_id) || is_null($name) || is_null($description) || is_null($price) || is_null($quantity) || is_null($image_url) || is_null($invoice_number) || is_null($session_id)) {
     echo json_encode(['message' => 'Datos incompletos']);
     $conn->close();
     exit;
