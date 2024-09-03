@@ -1,3 +1,5 @@
+/* Importar la fuente desde Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@400;700&family=Roboto+Serif:wght@400;700&display=swap');
 
 /* Estilos generales del body */
 body {
@@ -41,14 +43,12 @@ header {
     transform: scale(1.1); /* Efecto de agrandamiento suave al pasar el ratón */
 }
 
+/* Estilos para la imagen centrada en el header */
 .header-center-image {
     flex: 1; /* Permite a la imagen central ocupar espacio de flex */
     display: flex;
     justify-content: center; /* Centra la imagen horizontalmente */
- 
 }
-
-
 
 .header-center-image img {
     height: 60px; /* Ajusta el tamaño máximo de la imagen */
@@ -72,7 +72,6 @@ header nav a {
     transition: color 0.3s ease, text-shadow 0.3s ease; /* Transiciones suaves */
 }
 
-/* Estilo para los enlaces al pasar el ratón */
 header nav a:hover {
     color: #d83f65; /* Color de hover más vibrante */
     text-shadow: 0 0 5px rgba(216, 63, 101, 0.6); /* Efecto de brillo en hover */
@@ -106,7 +105,13 @@ nav span {
     margin-left: 10px;
 }
 
+/* Estilos generales para el main */
+main {
+    font-family: 'Arial', sans-serif;
+    background-color: #8077772d;
+}
 
+/* Estilos para el contenedor de productos */
 .contenedor-productos1 {
     display: flex;
     flex-wrap: wrap; /* Permite que las tarjetas se envuelvan en múltiples líneas */
@@ -120,20 +125,21 @@ nav span {
     grid-template-columns: 50% 50%;
 }
 
-.col-md-4{
-display: grid;
-grid-template-columns: 50% 50%;
+/* Estilos para las columnas */
+.col-md-4 {
+    display: grid;
+    grid-template-columns: 50% 50%;
 }
 
-
+/* Estilos para las filas */
 .row {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     width: 100%;
-    
 }
 
+/* Estilos para la sección de título */
 .text-center {
     background: linear-gradient(135deg, #2e2e2e42 0%, #5554546c 50%, #57575775 100%);
     height: 100px;
@@ -144,6 +150,7 @@ grid-template-columns: 50% 50%;
     border-radius: 15px; /* Bordes redondeados */
     padding: 10px;
 }
+
 h2 {
     font-family: "Playfair Display", serif; /* Letra elegante que combina con el estilo */
     font-size: 50px; /* Tamaño adecuado para resaltar */
@@ -153,35 +160,13 @@ h2 {
     margin: 0;
 }
 
-/* Importar la fuente desde Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
-
-
-
-/* Estilos generales para la tarjeta de producto */
-.producto-card1{
+/* Estilos generales para las tarjetas de producto */
+.producto-card,
+.producto-card1 {
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden; /* Asegura que el contenido no desborde */
-    width: 380px; /* Ancho fijo */
-    min-height: 500px; /* Altura mínima para mantener las tarjetas uniformes */
-    max-height: 600px; /* Altura máxima opcional para evitar excesiva expansión */
-    text-align: center;
-    padding: 20px;
-    transition: transform 0.3s, box-shadow 0.3s;
-    display: grid; /* Usar flexbox para alinear contenido */
-    flex-direction: column; /* Alinear contenido en columna */
-}
-
-.producto-card {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    width:100%; /* Asegúrate de que la tarjeta ocupe todo el ancho de su columna */
-    min-height: 500px;
-    max-height: 600px;
     text-align: center;
     padding: 20px;
     transition: transform 0.3s, box-shadow 0.3s;
@@ -189,6 +174,18 @@ h2 {
     flex-direction: column;
 }
 
+.producto-card1 {
+    width: 380px; /* Ancho fijo */
+    min-height: 500px; /* Altura mínima para mantener las tarjetas uniformes */
+    max-height: 600px; /* Altura máxima opcional para evitar excesiva expansión */
+    display: grid; /* Usar flexbox para alinear contenido */
+}
+
+.producto-card {
+    width: 100%; /* Asegúrate de que la tarjeta ocupe todo el ancho de su columna */
+    min-height: 500px;
+    max-height: 600px;
+}
 
 .producto-card:hover {
     transform: scale(1.05);
@@ -203,8 +200,6 @@ h2 {
     border-bottom: 2px solid #eee; /* Línea inferior de separación */
 }
 
-
-
 /* Estilo para el título del producto */
 .producto-title {
     font-family: 'Roboto Serif', serif;
@@ -212,8 +207,6 @@ h2 {
     margin: 10px 0;
     color: #333;
     font-weight: 700; /* Usar peso más fuerte para el título */
-    
-
 }
 
 /* Estilo para la descripción del producto */
@@ -223,19 +216,6 @@ h2 {
     color: #777777c2;
     margin-bottom: 10px;
     font-weight: bold;
-}
-
-.form-control{
-    height: 40px;
-    max-width: 80px;
-   
-}
-
-.card-body {
-    flex: 1; /* Hace que el cuerpo de la tarjeta ocupe el espacio restante */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; /* Distribuye el espacio entre los elementos */
 }
 
 /* Estilo para el precio del producto */
@@ -251,6 +231,13 @@ h2 {
     width: 50%;
 }
 
+.form-control {
+    height: 40px;
+    max-width: 80px;
+}
+
+/* Estilos para los botones */
+button,
 .btn-pink {
     background-color: #e94e77;
     border: none;
@@ -262,7 +249,17 @@ h2 {
     transition: background-color 0.3s;
     position: relative;
     font-weight: bold;
- 
+}
+
+button:hover,
+.btn-pink:hover {
+    background-color: #d83f65;
+    color: #fff;
+}
+
+.btn-pink:focus {
+    outline: none !important;
+    box-shadow: none !important;
 }
 
 .btn-pink .icon {
@@ -271,31 +268,10 @@ h2 {
     margin-right: 4px; /* Espacio entre el ícono y el texto */
     transition: transform 0.3s;
     display: inline-block;
-    
-}
-
-.btn-pink:hover {
-    background-color: #d83f65;
-    color: #fff;
- 
-
-
-}
-
-.btn-pink:focus {
-    outline: none !important;
-    box-shadow: none !important;
 }
 
 .btn-pink:hover .icon {
     transform: rotate(360deg);
-}
-
-/* Estilos generales para el main */
-main {
-    font-family: 'Arial', sans-serif;
-    background-color:  #8077772d;
-   
 }
 
 /* Estilos para el cart */
@@ -318,22 +294,6 @@ main {
     border-radius: 50%;
     padding: 2px 5px;
     font-size: 12px;
-}
-
-/* Estilos para los botones */
-button {
-    background-color: #e94e77;
-    border: none;
-    border-radius: 4px;
-    color: #fff;
-    cursor: pointer;
-    font-size: 1em;
-    padding: 10px 20px;
-    transition: background-color 0.3s;
-}
-
-button:hover {
-    background-color: #d83f65;
 }
 
 /* Estilos para el footer */

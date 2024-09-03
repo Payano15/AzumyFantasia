@@ -1,6 +1,10 @@
-/* Estilos generales del body */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@400;700&family=Roboto+Serif:wght@400;700&display=swap');
+
+
+
+/* Estilos Generales */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto Serif', serif; /* Fuente consistente */
     margin: 0;
     padding: 0;
     background-image: url('../img/logos/BACK2.jpg');
@@ -8,180 +12,108 @@ body {
     background-size: cover;
     background-attachment: fixed;
     background-position: center;
-    color: #000; /* Color de texto */
+    color: #000;
+    backdrop-filter: blur(4px);
 }
+
+main {
+    font-family: 'Arial', sans-serif;
+    background-color: #8077773f;
+    padding: 20px;margin: 10px 0, 20px 0;
+   
+    
+
+}
+
+
 
 /* Estilos para el header */
 header {
-    background-color: rgba(255, 255, 255, 0.8); /* Fondo semi-transparente para que el texto sea legible */
-    padding: 5px;
-    text-align: center;
+    background: rgba(255, 255, 255, 0.8); /* Fondo semi-transparente */
+    backdrop-filter: blur(10px); /* Efecto de desenfoque en el fondo */
+    padding: 15px 30px; /* Espaciado más amplio para mayor aire */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    transition: background 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves */
+}
+
+.logo img {
+    height: 60px; /* Tamaño del logo ajustado */
+    margin: 0;
+    transition: transform 0.3s ease; /* Transición para el logo */
+    align-items: center;
+}
+
+.logo img:hover {
+    transform: scale(1.1); /* Efecto de agrandamiento suave al pasar el ratón */
+}
+
+/* Estilos para la imagen centrada en el header */
+.header-center-image {
+    flex: 1; /* Permite a la imagen central ocupar espacio de flex */
+    display: flex;
+    justify-content: center; /* Centra la imagen horizontalmente */
+}
+
+.header-center-image img {
+    height: 60px; /* Ajusta el tamaño máximo de la imagen */
+    transition: transform 0.3s ease;
+    margin-left: 60%;
+}
+
+/* Estilos para el nav */
+nav {
+    display: flex;
+    align-items: center;
+}
+
+nav span {
+    margin-left: 10px;
+}
+
+nav img {
+    margin-left: 5px;
+    cursor: pointer;
+    transition: opacity 0.3s ease; /* Transición para el icono del carrito */
+}
+
+nav img:hover {
+    opacity: 0.7; /* Efecto de opacidad al pasar el ratón */
 }
 
 /* Estilos para los enlaces del nav en el header */
 header nav a {
-    color: #000;
+    color: #666; /* Color suave para los enlaces */
     text-decoration: none;
+    font-size: 16px;
+    font-weight: 00;
+    margin: 0 15px;
+    font-family: 'Roboto Serif', serif; /* Fuente consistente */
+    transition: color 0.3s ease, text-shadow 0.3s ease; /* Transiciones suaves */
+}
+
+header nav a:hover {
+    color: #d83f65; /* Color de hover más vibrante */
+    text-shadow: 0 0 5px rgba(216, 63, 101, 0.6); /* Efecto de brillo en hover */
+}
+
+/* Estilos para el icono del carrito y el precio */
+#total-price {
     font-weight: bold;
-    margin: 0 10px;
+    margin-left: 10px;
+    color: #666; /* Texto más suave */
+    font-family: 'Roboto Serif', serif; /* Fuente consistente */
+    transition: color 0.3s ease;
 }
-
-/* Estilo para los enlaces al pasar el ratón */
-.header nav a:hover {
-    text-decoration: underline;
-}
-
-/* Ajustes para el contenedor principal */
-.container {
-    padding: 60px 15px; /* Ajustar para crear espacio entre los elementos */
-}
-
-/* Estilos para las tarjetas de productos */
-.card {
-    border: none;
-    transition: transform 0.3s ease;
-}
-
-/* Efecto de escala al pasar el ratón sobre la tarjeta */
-.card:hover {
-    transform: scale(1.05);
-}
-
 /* Estilos para el footer */
 footer {
     background-color: rgba(255, 255, 255, 0.8); /* Fondo semi-transparente */
-    padding: 20px;
-    text-align: center;
-}
-
-/* Estilo para las imágenes dentro de las tarjetas */
-.card-img-top {
-    width: 100%; /* Asegura que la imagen ocupe todo el ancho del contenedor de la tarjeta */
-    height: auto; /* Mantiene la relación de aspecto original de la imagen */
-    object-fit: cover; /* Asegura que la imagen cubra el contenedor sin distorsionarse */
-}
-
-/* Opcional: Ajusta el tamaño del contenedor de la tarjeta */
-.cart {
-    position: relative;
-    text-decoration: none;
-    color: #FF0000; /* Color rojo */
-}
-
-.cart img {
-    margin-left: 5px;
-}
-
-.badge {
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    background-color: #FF0000; /* Color rojo */
-    color: white;
-    border-radius: 50%;
-    padding: 2px 5px;
-    font-size: 12px;
-}
-
-.logo img {
-    height: 90px;
-    display: flex;
-    margin-bottom: 0%;
-}
-
-nav {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 1px;
-}
-
-nav a {
-    margin-left: 15px;
-    text-decoration: none;
-    color: #000;
-}
-
-nav a:hover {
-    text-decoration: underline;
-}
-
-/*PRODUCTOS*/
-
-/* Estilos generales para el main */
-main {
-    font-family: 'Arial', sans-serif;
-    background-color: #8077773f;
-    padding: 20px;
-}
-
-/* Estilo para el catálogo */
-.catalogo {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-}
-
-/* Estilo para cada producto */
-.producto {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    max-width: 380px;
-    text-align: center;
-    padding: 20px;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.producto:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.producto img {
-    width: 100%;
-    height: 60%;
-    border-bottom: 2px solid #eee;
-}
-
-.producto h2 {
-    font-size: 1.5em;
-    margin: 10px 0;
-    color: #333;
-}
-
-.descripcion {
-    color: #777;
-    font-size: 0.9em;
-    margin: 10px 0;
-}
-
-.precio {
-    font-size: 1.2em;
-    color: #e94e77;
-    margin: 10px 0;
-}
-
-button {
-    background-color: #e94e77;
-    border: none;
-    border-radius: 4px;
-    color: #fff;
-    cursor: pointer;
-    font-size: 1em;
-    padding: 10px 20px;
-    transition: background-color 0.3s;
-}
-
-button:hover {
-    background-color: #d83f65;
-}
-
-/*footer*/
-footer {
-    background-color: #807777b6;
-    color: #fff;
     padding: 20px;
     text-align: center;
 }
@@ -204,49 +136,68 @@ footer a {
 footer a:hover {
     text-decoration: underline;
 }
+/* Estilos para el contenedor principal */
+.container {
+    padding: 60px 15px;
+}
 
-/* Botón buscar y cuadro de búsqueda */
-/* Estilo para el contenedor del formulario de búsqueda */
+/* Estilos de Navegación */
+
+/* Estilos para el carrito */
+.cart {
+    position: relative;
+    text-decoration: none;
+    color: #FF0000;
+}
+
+.cart img {
+    margin-left: 5px;
+}
+
+#cart-count {
+    font-size: 0.9em;
+    color: #999; /* Color más claro para el conteo del carrito */
+}
+
+
+
+/* Estilos para el formulario de búsqueda */
 .search-form {
     display: flex;
     align-items: center;
-    justify-content: flex-start; /* Alinea el contenido a la izquierda */
-    margin: 20px 0; /* Margen superior e inferior */
+    justify-content: flex-start;
+    margin: 20px 0;
 }
 
-/* Estilo para el cuadro de texto de búsqueda */
 .search-form input[type="search"] {
-    border-radius: 50px 0 0 50px; /* Bordes redondeados solo en el lado izquierdo */
-    border: 2px solid #007bff; /* Color del borde */
-    padding: 12px 25px; /* Espaciado interno del cuadro de texto */
-    width: 350px; /* Ajusta el ancho según lo necesites */
-    outline: none; /* Elimina el borde azul al hacer clic */
-    font-size: 16px; /* Tamaño de fuente más grande */
-    transition: box-shadow 0.3s ease; /* Transición suave para la sombra */
+    border-radius: 50px 0 0 50px;
+    border: 2px solid #d83f659f;
+    padding: 12px 25px;
+    width: 350px;
+    outline: none;
+    font-size: 16px;
+    transition: box-shadow 0.3s ease;
 }
 
-/* Efecto de sombra al enfocar el cuadro de texto */
 .search-form input[type="search"]:focus {
-    box-shadow: 0 0 10px rgba(0, 123, 255, 0.5); /* Sombra azul al enfocar */
+    box-shadow: 0 0 10px rgba#d83f65a8
 }
 
-/* Estilo para el botón de búsqueda */
 .search-form button {
-    border-radius: 0 50px 50px 0; /* Bordes redondeados solo en el lado derecho */
-    border: 2px solid #b30068; /* Color del borde */
-    border-left: none; /* Elimina el borde entre el botón y el cuadro de texto */
-    background-color: #b30068; /* Color de fondo del botón */
-    color: white; /* Color del texto */
-    padding: 12px 25px; /* Espaciado interno del botón */
-    cursor: pointer; /* Cambia el cursor a pointer al pasar el ratón */
-    font-size: 16px; /* Tamaño de fuente más grande */
-    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves */
+    border-radius: 0 50px 50px 0;
+    border: 2px solid #b30068;
+    border-left: none;
+    background-color: #b30068;
+    color: white;
+    padding: 12px 25px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Efecto de sombra al pasar el ratón sobre el botón */
 .search-form button:hover {
-    background-color: #0aee15; /* cuando le pones el puntero cambia de color */ 
-    box-shadow: 0 0 10px rgba(255, 0, 153, 0.5); /* Sombra azul */
+    background-color: #0aee15;
+    box-shadow: 0 0 10px rgba(255, 0, 153, 0.5);
 }
 
 /* Ajustes para pantallas más pequeñas */
@@ -257,60 +208,33 @@ footer a:hover {
 
     .search-form input[type="search"],
     .search-form button {
-        border-radius: 50px; /* Bordes redondeados en todos los lados */
-        width: 100%; /* Ocupa el 100% del ancho disponible */
+        border-radius: 50px;
+        width: 100%;
         margin-bottom: 10px;
     }
 
     .search-form button {
-        border-radius: 50px; /* Bordes redondeados en todos los lados */
-        border-left: 2px solid #ff00a2; /* Añadir borde izquierdo al botón */
+        border-radius: 50px;
+        border-left: 2px solid #ff00a2;
     }
 }
 
-
-/*aquie el css para el contenedor de los articulos*/
-/* Contenedor de resultados en columna */
-#search-results {
+/* Estilos para las tarjetas de productos */
+.card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* Asegura que el contenido no desborde */
+    text-align: center;
+    padding: 15px;
+    transition: transform 0.3s, box-shadow 0.3s;
     display: flex;
     flex-direction: column;
-    gap: 2rem; /* Espacio entre grupos de productos */
-    padding: 2rem;
-}
-
-/* Estilo para cada grupo de productos */
-.group {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-    padding: 1rem;
-}
-
-/* Estilo para el título de cada grupo */
-.group h4 {
-    margin: 0 0 1rem;
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #333;
-}
-
-/* Contenedor de tarjetas dentro de cada grupo */
-.group .cards-container {
-    display: flex;
-    flex-wrap: wrap; /* Permite que las tarjetas se envuelvan en caso de que no haya espacio suficiente */
-    gap: 1rem; /* Espacio entre tarjetas */
-}
-
-/* Estilo para cada tarjeta */
-.card {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    width: 300px; /* Ajusta el ancho según tus necesidades */
-    background-color: #fff;
+    width: 340px; /* Ancho fijo */
+    height: 510px;
+    min-height: 510px; /* Altura mínima para mantener las tarjetas uniformes */
+    max-height: 600px; /* Altura máxima opcional para evitar excesiva expansión */
+    
 }
 
 .card:hover {
@@ -320,8 +244,9 @@ footer a:hover {
 
 .card-img-top {
     width: 100%;
-    height: 200px; /* Ajusta la altura de las imágenes según sea necesario */
-    object-fit: cover;
+    height: 220px; /* Altura fija para las imágenes */
+    object-fit: cover; /* Ajusta la imagen para cubrir el área sin distorsionar */
+    border-bottom: 2px solid #eee; /* Línea inferior de separación */
 }
 
 .card-body {
@@ -329,63 +254,131 @@ footer a:hover {
 }
 
 .card-title {
-    font-size: 1.25rem;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
+    font-family: 'Roboto Serif', serif;
+    font-size: 1.3em;
+    margin: 10px 0;
     color: #333;
+    font-weight: 700; /* Usar peso más fuerte para el título */
 }
 
 .card-text {
-    font-size: 1rem;
-    color: #555;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.95em;
+    color: #777777c2;
+    margin-bottom: 10px;
+    font-weight: bold;
 }
 
 .card-text.price {
-    font-size: 1.125rem;
+    font-size: 1.1em;
+    color: #e94e77;
+    margin: 10px 0;
     font-weight: bold;
-    color: #333;
-    margin-top: 0.5rem;
 }
 
 .card-text p {
     margin: 0;
 }
 
-/* Estilos para imágenes por defecto si no hay imagen */
-img[src$='default-product.jpg'] {
-    opacity: 0.7; /* Hacer la imagen de default un poco más tenue */
-}
-
 /* Estilo para la sección de acciones en la tarjeta */
 .card-actions {
     display: flex;
-    align-items: center;
+    justify-content: flex; /* Alinea el botón a la izquierda */
     gap: 1rem;
-    margin-top: 1rem;
+    margin-top: 2rem;
 }
 
-/* Estilo para el cuadro de texto de cantidad */
 .quantity-input {
     width: 60px;
     padding: 0.5rem;
     border: 1px solid #ddd;
     border-radius: 4px;
     font-size: 1rem;
+    height: 40px;
+    max-width: 80px;
 }
 
-/* Estilo para el botón de comprar */
 .buy-button {
-    padding: 0.5rem 1rem;
+    background-color: #e94e77;
     border: none;
     border-radius: 4px;
-    background-color: #007bff;
     color: #fff;
-    font-size: 1rem;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    font-size: 1em;
+    padding: 10px 20px;
+    transition: background-color 0.3s;
+    position: relative;
+    font-weight: bold;
+    margin-inline-start: 19%;
 }
 
 .buy-button:hover {
-    background-color: #0056b3;
+    background-color: #d83f65;
+    color: #fff;
 }
 
+.buy-button:focus{
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.buy-button .icon {
+    width: 30px; /* Ajusta el tamaño del ícono */
+    height: 30px;
+    margin-right: 4px; /* Espacio entre el ícono y el texto */
+    transition: transform 0.3s;
+    display: inline-block;
+}
+
+.buy-button:hover .icon {
+    transform: rotate(360deg);
+}
+
+/* Contenedor de resultados en columna */
+#search-results {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem;
+}
+
+/* Estilo para cada grupo de productos */
+div.group {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.6); /* Fondo blanco con transparencia */
+    padding: 1rem;
+    max-width: 1200px;
+    justify-content: center;
+    box-sizing: border-box;
+    backdrop-filter: blur(10px); /* Efecto de desenfoque para mayor sutileza */
+
+}
+
+
+.group h4 {
+    font-family:'Garamond', serif; /* Letra elegante que combina con el estilo */
+    font-size: 40px; /* Tamaño adecuado para resaltar */
+    font-weight: bold; /* Letra más gruesa */
+    text-align:center;
+    background: linear-gradient(135deg, #b6b3b352 0%, #b6b3b352 50%, #b6b3b352 100%);
+    height: max-content;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    border-radius: 15px; /* Bordes redondeados */
+    display: flex;
+    justify-content: center;
+    
+}
+
+.group .cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+margin: 55px;
+}
+
+/* Estilos para imágenes por defecto si no hay imagen */
+img[src$='default-product.jpg'] {
+    opacity: 0.7;
+}

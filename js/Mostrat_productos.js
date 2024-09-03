@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
         resultsContainer.innerHTML = Object.values(groupedProducts).map(group => {
             return `
                 <div class="group">
-                    <h4>Artículo: ${group.articulo}</h4>
+                    <h4>${group.articulo}</h4>
                     <div class="cards-container">
                         ${group.items.map(product => {
                             const price = parseFloat(product.precio);
@@ -71,11 +71,12 @@ document.addEventListener('DOMContentLoaded', () => {
                                     <img src="../uploads/${product.urlimagen || 'default-product.jpg'}" class="card-img-top" alt="${product.descripcion}">
                                     <div class="card-body">
                                         <p class="card-title">${product.desc_articulo}</p>
-                                        <p class="card-text">Descripción: ${product.descripcion}</p>
-                                        <p class="card-text price">Precio: $${formattedPrice}</p>
+                                        <p class="card-text"> ${product.descripcion}</p>
+                                        <p class="card-text price">$${formattedPrice}</p>
                                         <div class="card-actions">
                                             <input type="number" class="quantity-input" min="1" value="1" aria-label="Cantidad">
-                                            <button class="btn btn-primary buy-button">Comprar</button>
+                                            <button class="btn buy-button btn-pink"> 
+                                            <img src='../img/iconos/anadir-a-la-cesta.png' class="icon" alt="icono"> Comprar</button>
                                         </div>
                                     </div>
                                 </div>
