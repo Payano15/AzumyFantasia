@@ -267,3 +267,125 @@ footer a:hover {
         border-left: 2px solid #ff00a2; /* Añadir borde izquierdo al botón */
     }
 }
+
+
+/*aquie el css para el contenedor de los articulos*/
+/* Contenedor de resultados en columna */
+#search-results {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem; /* Espacio entre grupos de productos */
+    padding: 2rem;
+}
+
+/* Estilo para cada grupo de productos */
+.group {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    padding: 1rem;
+}
+
+/* Estilo para el título de cada grupo */
+.group h4 {
+    margin: 0 0 1rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Contenedor de tarjetas dentro de cada grupo */
+.group .cards-container {
+    display: flex;
+    flex-wrap: wrap; /* Permite que las tarjetas se envuelvan en caso de que no haya espacio suficiente */
+    gap: 1rem; /* Espacio entre tarjetas */
+}
+
+/* Estilo para cada tarjeta */
+.card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 300px; /* Ajusta el ancho según tus necesidades */
+    background-color: #fff;
+}
+
+.card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.card-img-top {
+    width: 100%;
+    height: 200px; /* Ajusta la altura de las imágenes según sea necesario */
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 1rem;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.card-text {
+    font-size: 1rem;
+    color: #555;
+}
+
+.card-text.price {
+    font-size: 1.125rem;
+    font-weight: bold;
+    color: #333;
+    margin-top: 0.5rem;
+}
+
+.card-text p {
+    margin: 0;
+}
+
+/* Estilos para imágenes por defecto si no hay imagen */
+img[src$='default-product.jpg'] {
+    opacity: 0.7; /* Hacer la imagen de default un poco más tenue */
+}
+
+/* Estilo para la sección de acciones en la tarjeta */
+.card-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+/* Estilo para el cuadro de texto de cantidad */
+.quantity-input {
+    width: 60px;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+/* Estilo para el botón de comprar */
+.buy-button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.buy-button:hover {
+    background-color: #0056b3;
+}
+

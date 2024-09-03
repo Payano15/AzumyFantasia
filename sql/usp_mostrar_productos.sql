@@ -25,7 +25,7 @@ BEGIN
     FROM articulos a
     JOIN sub_articulo sb ON sb.idsubartic = a.idarticulo
     WHERE 
-        (textosearch = '' OR textosearch = '0' OR a.articulo LIKE CONCAT('%', textosearch, '%') OR sb.descripcion LIKE CONCAT('%', textosearch, '%'))
+        (textosearch = '' OR a.articulo LIKE CONCAT('%', textosearch, '%') OR sb.descripcion LIKE CONCAT('%', textosearch, '%'))
         AND a.estatus = 'ACT'
     ORDER BY a.codarticulo, a.idarticulo;
 
