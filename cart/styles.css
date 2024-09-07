@@ -1,0 +1,182 @@
+/* Estilos generales del body */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    color: #ffffff; /* Color de texto */
+}
+
+/* Estilos para el header */
+header {
+    background: rgba(255, 255, 255, 0.8); /* Fondo semi-transparente */
+    backdrop-filter: blur(10px); /* Efecto de desenfoque en el fondo */
+    padding: 15px 30px; /* Espaciado más amplio para mayor aire */
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    position: fixed;
+    transition: background 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves */
+}
+
+/* Estilos para el logo */
+.logo img {
+    height: 60px; /* Tamaño del logo ajustado */
+    margin: 0;
+    transition: transform 0.3s ease; /* Transición para el logo */
+    align-items: center;
+}
+
+.logo img:hover {
+    transform: scale(1.1); /* Efecto de agrandamiento suave al pasar el ratón */
+}
+
+/* Estilos para la imagen centrada en el header */
+.header-center-image {
+    flex: 1; /* Permite a la imagen central ocupar espacio de flex */
+    display: flex;
+    justify-content: center; /* Centra la imagen horizontalmente */
+}
+
+.header-center-image img {
+    height: 60px; /* Ajusta el tamaño máximo de la imagen */
+    transition: transform 0.3s ease;
+    margin-left: 60%;
+}
+
+/* Estilos para el nav */
+nav {
+    display: flex;
+    align-items: center;
+}
+
+/* Estilos para los enlaces del nav en el header */
+header nav a {
+    color: #666; /* Color suave para los enlaces */
+    text-decoration: none;
+    font-weight: 500;
+    margin: 0 15px;
+    font-family: 'Roboto Serif', serif; /* Fuente consistente */
+    transition: color 0.3s ease, text-shadow 0.3s ease; /* Transiciones suaves */
+}
+
+header nav a:hover {
+    color: #d83f65; /* Color de hover más vibrante */
+    text-shadow: 0 0 5px rgba(216, 63, 101, 0.6); /* Efecto de brillo en hover */
+}
+
+/* Estilos para el icono del carrito y el precio */
+#total-price {
+    font-weight: bold;
+    margin-left: 10px;
+    color: #666; /* Texto más suave */
+    font-family: 'Roboto Serif', serif; /* Fuente consistente */
+    transition: color 0.3s ease;
+}
+
+#cart-count {
+    font-size: 0.9em;
+    color: #999; /* Color más claro para el conteo del carrito */
+}
+
+nav img {
+    margin-left: 5px;
+    cursor: pointer;
+    transition: opacity 0.3s ease; /* Transición para el icono del carrito */
+}
+
+nav img:hover {
+    opacity: 0.7; /* Efecto de opacidad al pasar el ratón */
+}
+
+nav span {
+    margin-left: 10px;
+}
+  
+h2{
+    position: absolute; /* Permite posicionar el h3 con respecto al contenedor */
+    top: 4%; /* Alinea el h3 en la parte superior del contenedor */
+    left: 50%; /* Alinea el centro del h3 horizontalmente con el centro del contenedor */
+    transform: translateX(-50%); /* Ajusta la posición para que el centro del h3 esté alineado con el centro del contenedor */
+    font-family: 'Roboto Slab', serif;
+
+}
+
+
+
+#final_button {
+    margin-left: 80%; /* Esto asegura que el botón esté centrado si hay un margen automático */
+
+    display:flex; /* Hace que el botón sea un bloque para que el margen automático funcione */
+    padding: 10px 50px; /* Ajusta el tamaño del botón */
+    font-size: 16px; /* Tamaño de fuente del botón */
+    background-color: #d83f65;
+
+
+}
+
+
+
+
+
+/* footer del carrito */
+.cart-footer {
+    background-color: rgba(219, 80, 101, 0.8); 
+    padding: 10px;
+    display: flex;
+    position: fixed;
+    bottom: 25%;
+    width: 100%;
+    z-index: 100; /* Asegura que esté encima de otros elementos si es necesario */
+}
+
+
+
+
+footer {
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo semi-transparente */
+    padding: 20px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 1000; /* Asegura que esté encima de otros elementos si es necesario */
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+footer p {
+    margin: 10px 0;
+}
+
+footer a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+
+.badge {
+    position: absolute;
+    top: 10px;
+    right: -10px;
+    background-color: #5f5f5f;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 5px;
+    font-size: 12px;
+}
