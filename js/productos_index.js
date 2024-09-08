@@ -4,6 +4,7 @@ function inicializarPagina() {
     inicializarCarrito(); // Reinicia el carrito al cargar la página
     cargarDatosProductos(); // Carga los productos desde el archivo PHP
     actualizarTotalCarrito(); // Actualiza el total del carrito al iniciar
+    asegurarSessionID(); // Verifica o crea el session_id
 }
 
 function inicializarCarrito() {
@@ -87,76 +88,9 @@ function renderProductos(productos) {
 }
 
 function handleAddToCart(product_id, name, description, price, image_url) {
-    const quantity = parseInt(document.getElementById(`quantity-${product_id}`).value, 10);
-    const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-
-    const productoExistente = carrito.find(item => item.product_id === product_id);
-
-    if (productoExistente) {
-        productoExistente.quantity += quantity;
-    } else {
-        carrito.push({ product_id, name, description, price, quantity, image_url });
-    }
-
-    localStorage.setItem('carrito', JSON.stringify(carrito));
-    actualizarTotalCarrito(); // Actualizar el total después de añadir un producto
-}
-
-
-// Función para obtener un nuevo session_id desde el servidor y almacenarlo en localStorage
-function obtenerSessionID() {
-    return fetch('./php/get_session_id.php')
-        .then(response => response.json())
-        .then(data => {
-            console.log('Datos recibidos del servidor:', data);
-            if (data.session_id) {
-                // Convertir el session_id a entero y almacenarlo en localStorage
-                const session_id = parseInt(data.session_id, 10);
-                if (isNaN(session_id)) {
-                    throw new Error('El session_id recibido no es un número válido.');
-                }
-                localStorage.setItem('session_id', session_id);
-                return session_id;
-            } else {
-                throw new Error('El session_id recibido del servidor no es válido.');
-            }
-        })
-        .catch(error => {
-            console.error('Error al obtener session_id:', error);
-            return null;
-        });
-}
-
-// Ejemplo de uso
-obtenerSessionID()
-    .then(session_id => {
-        if (session_id !== null) {
-            console.log('Session ID almacenado en localStorage:', session_id);
-        } else {
-            console.log('No se pudo obtener un session_id válido.');
-        }
-    });
-
-// Verificar si existe un session_id en localStorage
-let session_id = localStorage.getItem('session_id');
-
-// Si no existe, obtenemos uno del servidor
-if (!session_id) {
-    obtenerSessionID().then(newSessionID => {
-        if (newSessionID) {
-            console.log('Session ID almacenado en localStorage:', newSessionID);
-        }
-    });
-} else {
-    console.log('Session ID desde localStorage:', session_id);
-}
-
-// Función para manejar el clic en el botón de añadir al carrito
-function handleAddToCart(product_id, name, description, price, image_url) {
     agregarAlCarrito(product_id, name, description, price, image_url);
 }
 
-// Función para agregar productos al carrito
 function agregarAlCarrito(product_id, name, description, price, image_url) {
     const quantity = parseInt(document.getElementById(`quantity-${product_id}`).value, 10);
 
@@ -208,6 +142,11 @@ function enviarDatosAlServidor(product_id, name, description, price, quantity, i
     .then(response => response.json())
     .then(data => {
         console.log('Respuesta del servidor:', data);
+        if (data.status === 'success') {
+            alert('Producto añadido al carrito con éxito');
+        } else {
+            alert(`Error: ${data.message}`);
+        }
     })
     .catch(error => {
         console.error('Error:', error);
@@ -234,11 +173,24 @@ function obtenerSessionID() {
         });
 }
 
+// Asegura que haya un session_id válido en localStorage
+function asegurarSessionID() {
+    let session_id = localStorage.getItem('session_id');
 
+    if (!session_id) {
+        obtenerSessionID().then(newSessionID => {
+            if (newSessionID) {
+                console.log('Session ID almacenado en localStorage:', newSessionID);
+            } else {
+                console.log('No se pudo obtener un session_id válido.');
+            }
+        });
+    } else {
+        console.log('Session ID desde localStorage:', session_id);
+    }
+}
 
-
-
-// esta funcion elimina el cache de la pagina
+// Esta función elimina el cache de la página
 window.onload = function () {
     // Verificar si la caché ya ha sido limpiada
     if (!sessionStorage.getItem('cacheCleared')) {
