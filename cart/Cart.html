@@ -31,12 +31,31 @@
     </div>
     <div class="row mt-4">
         <div class="col-md-12 text-center">
-            <button class="btn btn-success" id="final_button">FINALIZAR COMPRA</button>
+            <button class="btn btn-success" id="final_button" data-toggle="modal" data-target="#invoiceModal">FINALIZAR PEDIDO</button>
         </div>
     </div>
-    <br>
-    <br>
-    <br>
+
+    <!-- Modal para mostrar la factura -->
+    <div class="modal fade" id="invoiceModal" tabindex="-1" role="dialog" aria-labelledby="invoiceModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document"> <!-- Cambiado a modal-xl para hacerlo más grande -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="invoiceModalLabel">Factura</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <iframe id="invoiceFrame" src="" width="100%" height="600px" style="border: none;"></iframe> <!-- Aumenta la altura del iframe para un mejor ajuste -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" id="generatePdfButton">Terminar pedido</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <footer class="text-center py-4">
         <p>&copy; 2024 Your Company Name</p>
         <div class="social-icons">
@@ -54,9 +73,68 @@
             </a>
         </div>
     </footer>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
     <script src="../js/mostrat_productos_fact.js"></script> <!-- Enlace a tu archivo JavaScript externo -->
+    <script src="../js/save_send_pdf.js"></script> <!-- guardar y enviar por ws -->
+    
+    <!-- Script para mostrar el modal y cargar la factura -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+    // Evento para el botón "FINALIZAR COMPRA"
+    document.getElementById('final_button').addEventListener('click', function () {
+        console.log('Botón FINALIZAR COMPRA clicado.');
+        
+        // Verifica si el iframe está siendo cargado
+        const invoiceFrame = document.getElementById('invoiceFrame');
+        invoiceFrame.src = 'factura.html';  // Asegúrate de que la ruta a factura.html sea correcta
+        invoiceFrame.onload = function() {
+            console.log('Contenido de factura.html cargado en el iframe.');
+        };
+    });
+
+    // Generar el PDF cuando se hace clic en "Generar PDF"
+    document.getElementById('generatePdfButton').addEventListener('click', function () {
+        const invoiceFrame = document.getElementById('invoiceFrame');
+        invoiceFrame.onload = function () {
+            console.log('Generando PDF...');
+            html2pdf().from(invoiceFrame.contentWindow.document.body).outputPdf().then(function (pdfData) {
+                // Crear un objeto FormData para enviar el PDF
+                let formData = new FormData();
+                formData.append('pdf', new Blob([pdfData], { type: 'application/pdf' }), 'factura.pdf');
+
+                // Hacer una solicitud POST al backend para guardar el PDF
+                fetch('../php/save_pdf.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.text()) // Cambia a .text() para ver la respuesta completa
+                .then(result => {
+                    console.log('Respuesta del servidor:', result); // Muestra la respuesta completa en la consola
+                    try {
+                        const jsonResult = JSON.parse(result); // Intenta convertir a JSON
+                        if (jsonResult.status === 'success') {
+                            console.log('PDF guardado en:', jsonResult.path);
+                            // Aquí se puede proceder a enviar el PDF por WhatsApp
+                            enviarPorWhatsApp(jsonResult.path); // Llamar a la función para enviar por WhatsApp
+                        } else {
+                            console.error('Error al guardar el PDF:', jsonResult.message);
+                        }
+                    } catch (e) {
+                        console.error('Error al analizar JSON:', e);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error en la solicitud:', error);
+                });
+            });
+        };
+    });
+});
+
+    </script>
 </body>
 </html>

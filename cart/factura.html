@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../img/logos/logo 1.jpeg" type="image/x-icon">
+    <title>PEDIDO</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .invoice {
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        .invoice-header {
+            margin-bottom: 30px;
+            border-bottom: 2px solid #ff00d4;
+            padding-bottom: 15px;
+        }
+        .invoice-header h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+        .invoice-header img {
+            max-width: 120px;
+        }
+        .invoice-info h5 {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        .table th {
+            background-color: #ff00d4;
+            color: white;
+            font-weight: bold;
+        }
+        .table td {
+            font-size: 1.1rem;
+        }
+        .total-row {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .invoice-footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 1rem;
+            color: #777;
+        }
+        .text-right {
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <div class="container my-5">
+        <div class="invoice p-5">
+            <!-- Header de la Factura -->
+            <div class="row invoice-header">
+                <div class="col-sm-6">
+                    <img src="../img/logos/logo 1.jpeg" alt="Logo Empresa" class="img-fluid">
+                </div>
+                <div class="col-sm-6 text-right">
+                    <h1>PEDIDO</h1>
+                    <p id="invoice-number">Pedido#</p>
+                    <p id="invoice-date">Fecha: </p>
+                </div>
+            </div>
+
+            <!-- Tabla de Productos -->
+            <table class="table table-bordered mt-4" id="invoice-items">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio Unitario</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Productos del carrito se cargarán aquí dinámicamente -->
+                </tbody>
+            </table>
+
+            <!-- Total -->
+            <div class="text-right">
+                <p id="invoice-total" class="font-weight-bold"></p>
+            </div>
+
+            <!-- Footer de la Factura -->
+            <div class="invoice-footer">
+                <p>Gracias por su Pedido. Si tiene alguna pregunta sobre este Pedido, contáctenos en <strong>info@azumyfantasia.com</strong>.</p>
+                <p><strong>Azumy Fantasia</strong> - Tu tienda de fantasía en línea.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="../js/factura.js"></script>
+</body>
+</html>
