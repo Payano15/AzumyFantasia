@@ -127,14 +127,11 @@ h2{
 
 
 /* footer del carrito */
-.cart-footer {
+#cart-footer {
     background-color: rgba(219, 80, 101, 0.8); 
     padding: 10px;
-    display: flex;
-    position: fixed;
-    bottom: 25%;
     width: 100%;
-    z-index: 100; /* Asegura que esté encima de otros elementos si es necesario */
+    
 }
 
 
