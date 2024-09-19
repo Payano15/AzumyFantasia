@@ -23,7 +23,7 @@ if (isset($_FILES['pdf']) && $_FILES['pdf']['error'] === UPLOAD_ERR_OK) {
     if (move_uploaded_file($tmpName, $filePath)) {
         echo json_encode([
             'status' => 'success',
-            'path' => 'pdfs/' . $fileName
+            'path' => 'pdfs/factura.pdf' // Usa barras normales
         ]);
     } else {
         echo json_encode([
